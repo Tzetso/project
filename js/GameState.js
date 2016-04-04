@@ -114,13 +114,17 @@ GameState.prototype.killPlatforms = function(){
 
         i = setTimeout(function(){
             callTimeout();
-            var platformToKill = _this.platforms.getFirstExists().kill();
+
+            if (_this.player.position.y < 14000) {
+                _this.platforms.getFirstExists().kill();
+                console.log(_this.player.position.y);
+            }
             if (_this.player.position.y > _this.platforms.getFirstExists().position.y) {
                 _this.killPlayer();
                 clearTimeout(i)
             }
-            t -= 10;
-            console.log(t);
+            t -= 20;
+            //console.log(t);
             if (t <= 0){
                 clearTimeout(i)
             }
