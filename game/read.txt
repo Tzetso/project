@@ -1,1 +1,1 @@
-Folder for the angular framework
+Folder for the game
