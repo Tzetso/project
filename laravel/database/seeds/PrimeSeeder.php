@@ -13,5 +13,6 @@ class PrimeSeeder extends Seeder
     {
         $this->call(UsersTableSeeder::class);
         $this->call(ItemsTableSeeder::class);
+        $this->call(InventorySeeder::class);
     }
 }

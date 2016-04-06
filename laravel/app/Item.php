@@ -15,12 +15,11 @@ class Item extends Model
 			'name', 'description', 'price', 'picture'
 	];
 	
-	/**
-	 * The attributes that should be hidden for arrays.
-	 *
-	 * @var array
+	/*
+	 * The users an item belongs to
 	 */
-	protected $hidden = [
-			'picture',
-	];
+	public function users()
+	{
+		return $this->belongsToMany('App\User', 'inventory', 'item_id', 'user_id');
+	}
 }

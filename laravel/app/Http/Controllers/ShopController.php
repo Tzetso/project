@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 
+use App\Item;
+
 class ShopController extends Controller
 {
 /**
@@ -25,6 +27,8 @@ class ShopController extends Controller
      */
     public function index()
     {
-        return view('shop');
+    	$items = Item::all();
+    	
+        return view('shop', compact('items'));
     }
 }

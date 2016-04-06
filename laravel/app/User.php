@@ -23,4 +23,12 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+    
+    /*
+     * The items that belong to a user
+     */
+    public function items()
+    {
+    	return $this->belongsToMany('App\Item', 'inventory', 'user_id', 'item_id');
+    }
 }
