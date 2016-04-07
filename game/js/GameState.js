@@ -87,6 +87,8 @@ GameState.prototype.create = function () {
         var x = this.game.rnd.realInRange(50, 350);
         this.platformArray[i].reset(x,(this.land.y - i*150));
         this.platformArray[i].scale.x = this.game.rnd.realInRange(0.2, 0.4);
+        this.randCoordinates = Math.floor(Math.random() * (370-50) + 50);
+        this.slidePlatformsTween = this.game.add.tween(this.platformArray[i]).to({ x: this.randCoordinates }, 1500, Phaser.Easing.Linear.None, true, 0, 1000, true);
 
     }
 
@@ -243,7 +245,7 @@ GameState.prototype.createPlatforms = function(){
     for (var i = 0; i < 150; i++)
     {
         var p = this.platforms.create(0, 0, 'platform');
-        this.slidePlatformsTween = this.game.add.tween(p).to({ x: 370 }, 4000, Phaser.Easing.Linear.None, true, 0, 1000, true);
+
         p.scale.y = 0.5;
         p.name = 'platform' + i;
         p.exists = false;
