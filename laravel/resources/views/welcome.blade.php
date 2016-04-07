@@ -9,9 +9,9 @@
 
                 <div class="panel-body">
                 	@if(Auth::guest()) 
-                		Yo Guest
+                		Sup Guest
                 	@else                 
-                    	Yo {{ Auth::user()->username}}
+                    	Sup {{ Auth::user()->username}}
                     @endif
                 </div>
             </div>

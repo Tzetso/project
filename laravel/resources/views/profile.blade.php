@@ -8,11 +8,11 @@
                 <div class="panel-heading">Profile</div>
 
                 <div class="panel-body">
-                     Username:{{Auth::user()->username}}
+                     Username:{{$user->username}}
                 </div>
                 
                 <div class="panel-body">
-                     Email:{{Auth::user()->email}}
+                     Email:{{$user->email}}
                 </div>
                 
                 <table class=".table-responsive">
@@ -25,12 +25,12 @@
                 		</tr>
                 	</thead>
                 	<tbody>
-	                	@foreach(Auth::user()->items() as $item)
+	                	@foreach($items as $item) 
 		                	<tr>
 								<td>{{$item->name}}</td>
 		                     	<td>{{$item->description}}</td>
 		                     	<td>{{$item->price}}</td>
-		                     	<td>{{$item->pivot->count}}</td>
+		                     	<td>{{$item->pivot->quantity}}</td>
 		                    </tr>
 	               		@endforeach
                 	</tbody>             

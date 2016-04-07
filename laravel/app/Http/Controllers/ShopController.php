@@ -31,4 +31,5 @@ class ShopController extends Controller
     	
         return view('shop', compact('items'));
     }
+    
 }
