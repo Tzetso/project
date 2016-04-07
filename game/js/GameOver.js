@@ -15,7 +15,7 @@ GameOverMenuState.prototype.create = function () {
     console.log(this);
     var style = { font: "20px Courier", fill: "#fff", tabs: 132 };
 
-    this.text = this.game.add.text(this.game.world.centerX , this.game.world.centerY - 100, 'GAME OVER '+ this.game.stats);
+    this.text = this.game.add.text(this.game.world.centerX , this.game.world.centerY - 100, 'GAME OVER '+ '\n' + 'Your score: ' + this.game.stats);
 
     //this.text = this.game.add.text(this.game.world.centerX , this.game.world.centerY - 100, 'GAME OVER');
     ////	Center align

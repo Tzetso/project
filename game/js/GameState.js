@@ -4,7 +4,16 @@ var GameState = function(game) {
     this.currentPlatformsCount = 0;
     this.platformArray = [];
     this.points = 0;
-    this.timer = null;
+    this.timer = {
+        t : 3000
+    }
+
+    this.dateTimer = null;
+    this.timeBonusArray = [];
+    this.jumpBonusArray = [];
+    this.timeAntiBonus = [];
+
+
 
 };
 GameState.prototype.preload = function () {
@@ -14,11 +23,18 @@ GameState.prototype.preload = function () {
     this.game.load.baseURL = 'http://examples.phaser.io/assets/';
     this.game.load.crossOrigin = 'anonymous';
 
-
+    this.game.load.image('ground', 'http://localhost:63342/Phaser-Game/assets/land.png');
     this.game.load.image('column', 'http://localhost:63342/Phaser-Game/assets/column.png');
-    this.game.load.image('platform', 'sprites/platform.png');
+    this.game.load.image('platform', 'http://localhost:63342/Phaser-Game/assets/platform.png');
     this.game.load.image('player', 'sprites/phaser-dude.png');
     this.game.load.image('points', 'http://localhost:63342/Phaser-Game/assets/points.png');
+    this.game.load.image('timeBonus', 'http://localhost:63342/Phaser-Game/assets/timeBonus.png');
+    this.game.load.image('jumpBonus', 'http://localhost:63342/Phaser-Game/assets/jumpBonus.png');
+    this.game.load.image('timeAntiBonus', 'http://localhost:63342/Phaser-Game/assets/timeAntiBonus.png');
+    this.game.load.audio('jumpSound', 'http://localhost:63342/Phaser-Game/assets/jump.mp3');
+    this.game.load.audio('timeAntiBonusSound', 'http://localhost:63342/Phaser-Game/assets/timeAntiBonus.mp3');
+    this.game.load.audio('timeBonusSound', 'http://localhost:63342/Phaser-Game/assets/timeBonus.mp3');
+    this.game.load.audio('backgroundMusic', 'http://localhost:63342/Phaser-Game/assets/background-music.mp3');
 };
 
 //var textStyle = { font: '64px Desyrel', align: 'center'};
@@ -30,12 +46,12 @@ var tween;
 
 GameState.prototype.create = function () {
 
-    this.timer = Date.now();
+    this.dateTimer = Date.now();
     this.game.world.resize(600, 15000);
 
 
-    this.land = this.game.add.sprite(0,14950,'platform');
-    this.land.scale.setTo(1.2,1);
+    this.land = this.game.add.sprite(0,14950,'ground');
+    this.land.scale.setTo(1 ,0.7);
 
     this.leftColumn = this.game.add.sprite(0,0,'column');
     this.rightColumn = this.game.add.sprite(590,0,'column');
@@ -59,6 +75,8 @@ GameState.prototype.create = function () {
 
 
     this.createPlatforms();
+    this.createTimeBonuses();
+    this.createTimeAntiBonuses();
 
     this.cursors = this.game.input.keyboard.addKeys( { 'up': Phaser.KeyCode.W, 'down': Phaser.KeyCode.S, 'left': Phaser.KeyCode.A, 'right': Phaser.KeyCode.D } );
     this.jumpButton = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
@@ -66,9 +84,23 @@ GameState.prototype.create = function () {
 
     for(var i = 0;i < 150; i++){
         this.platformArray[i] = this.platforms.getFirstExists(false);
-        var x = this.game.rnd.realInRange(1, 300);
+        var x = this.game.rnd.realInRange(50, 350);
         this.platformArray[i].reset(x,(this.land.y - i*150));
         this.platformArray[i].scale.x = this.game.rnd.realInRange(0.2, 0.4);
+    }
+
+    for(var i = 0;i < 10; i++){
+        var x = this.game.rnd.realInRange(50, 350);
+        var y = this.game.rnd.realInRange(50, 13000);
+        var t =  this.timeBonuses.getFirstExists(false).reset(x, y);
+        t.scale.setTo(0.2, 0.2);
+    }
+
+    for(var i = 0;i < 20; i++){
+        var x = this.game.rnd.realInRange(50, 350);
+        var y = this.game.rnd.realInRange(50, 13000);
+        var t =  this.timeAntiBonuses.getFirstExists(false).reset(x, y);
+        t.scale.setTo(0.3, 0.3);
     }
 
     this.player = this.game.add.sprite(200, 14910, 'player');
@@ -76,7 +108,7 @@ GameState.prototype.create = function () {
     this.game.physics.arcade.enable(this.player);
 
     this.player.body.collideWorldBounds = false;
-    this.player.body.gravity.y = 500;
+    this.player.body.gravity.y = 800;
     this.player.body.bounce.x = 0.6;
     this.player.body.drag.setTo(200);
     this.player.body.drag.x = 100;
@@ -94,6 +126,13 @@ GameState.prototype.create = function () {
 
     this.text.fixedToCamera = true;
 
+    this.jumpSound = this.game.add.audio('jumpSound');
+    this.timeAntiBonusSound = this.game.add.audio('timeAntiBonusSound');
+    this.timeBonusSound = this.game.add.audio('timeBonusSound');
+    this.backgroundMusic = this.game.add.audio('backgroundMusic');
+
+    this.backgroundMusic.play();
+
 
 };
 
@@ -101,8 +140,25 @@ GameState.prototype.create = function () {
 GameState.prototype.update = function () {
 
     //this.player.isColumn = false;
+    var _this = this;
+
+    this.game.physics.arcade.overlap(this.land, this.platforms, function (land, platform) {
+        platform.kill();
+    });
 
     this.game.physics.arcade.collide(this.player, this.platforms);
+    this.game.physics.arcade.overlap(this.player, this.timeBonuses, function (player, timeBonus) {
+        timeBonus.kill();
+        _this.timer.t += 500;
+        _this.timeBonusSound.play();
+    });
+
+    this.game.physics.arcade.overlap(this.player, this.timeAntiBonuses, function (player, timeAntiBonus) {
+        timeAntiBonus.kill();
+        _this.timeAntiBonusSound.play();
+        _this.timer.t -= 500;
+    });
+
     this.game.physics.arcade.collide(this.player, this.land);
     this.game.physics.arcade.collide(this.player, this.platforms, function(player){
         //player.body.velocity.x = 00;
@@ -137,7 +193,8 @@ GameState.prototype.update = function () {
 
     if (this.jumpButton.isDown && (this.player.body.onFloor() || this.player.body.touching.down))
     {
-        this.player.body.velocity.y = -500;
+        this.jumpSound.play();
+        this.player.body.velocity.y = -600;
     }
     var collisionPlayer = false;
 
@@ -192,11 +249,12 @@ GameState.prototype.createPlatforms = function(){
         p.checkWorldBounds = true;
         p.body.immovable = true;
         p.body.checkCollision.down = false;
+        p.body.checkCollision.left = false;
+        p.body.checkCollision.right = false;
         p.body.friction.x = 0;
-        //console.log(p.body);
+        //console.log(p);
         p.events.onOutOfBounds.add(function(p){
             p.kill();
-            console.log('New Platform')
         }, this);
         if(p.y - this.land.y){
             p.kill();
@@ -205,8 +263,64 @@ GameState.prototype.createPlatforms = function(){
 
 
 };
+
+GameState.prototype.createTimeBonuses = function(){
+
+    this.timeBonuses = this.game.add.group();
+    this.timeBonuses.enableBody = true;
+    this.timeBonuses.physicsBodyType = Phaser.Physics.ARCADE;
+
+    for (var i = 0; i < 150; i++)
+    {
+        var tB = this.timeBonuses.create(0, 0, 'timeBonus');
+        tB.scale.y = 0.5;
+        tB.name = 'timeBonus' + i;
+        tB.exists = false;
+        tB.visible = false;
+        tB.checkWorldBounds = true;
+        //tB.body.immovable = true;
+        //console.log(tB.body);
+        tB.events.onOutOfBounds.add(function(tB){
+            tB.kill();
+        }, this);
+        if(tB.y - this.land.y){
+            tB.kill();
+        }
+    }
+
+
+};
+
+GameState.prototype.createTimeAntiBonuses = function(){
+
+    this.timeAntiBonuses = this.game.add.group();
+    this.timeAntiBonuses.enableBody = true;
+    this.timeAntiBonuses.physicsBodyType = Phaser.Physics.ARCADE;
+
+    for (var i = 0; i < 150; i++)
+    {
+        var tAB = this.timeAntiBonuses.create(0, 0, 'timeAntiBonus');
+        tAB.scale.y = 0.5;
+        tAB.name = 'timeBonus' + i;
+        tAB.exists = false;
+        tAB.visible = false;
+        tAB.checkWorldBounds = true;
+        //tAB.body.immovable = true;
+        //console.log(tB.body);
+        tAB.events.onOutOfBounds.add(function(tAB){
+            tAB.kill();
+        }, this);
+        if(tAB.y - this.land.y){
+            tAB.kill();
+        }
+    }
+
+
+};
+
+
+
 GameState.prototype.killPlatforms = function(){
-    var t = 3000;
     var i = null;
     var _this = this;
 
@@ -221,21 +335,21 @@ GameState.prototype.killPlatforms = function(){
                 platform.kill();
 
             }
-            if (Date.now() - _this.timer > 20000 && _this.player.position.y > _this.platforms.getFirstExists().position.y) {
+            if (Date.now() - _this.dateTimer > 20000 && _this.player.position.y > _this.platforms.getFirstExists().position.y) {
                 console.log(_this.player.position.y > _this.platforms.getFirstExists().position.y);
                 _this.killPlayer();
 
                 clearTimeout(i)
             }
-            t -= 200;
+            _this.timer.t -= 200;
 /*            console.log(_this.player);
             console.log(t);
             console.log(_this.game.time.totalElapsedSeconds());*/
-            if (t <= 0){
-                t = 1500;
+            if (_this.timer.t <= 0){
+                _this.timer.t = 1500;
             }
 
-        }, t)
+        }, _this.timer.t)
     }
 
 
