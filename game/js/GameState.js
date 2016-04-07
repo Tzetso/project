@@ -243,6 +243,7 @@ GameState.prototype.createPlatforms = function(){
     for (var i = 0; i < 150; i++)
     {
         var p = this.platforms.create(0, 0, 'platform');
+        this.slidePlatformsTween = this.game.add.tween(p).to({ x: 370 }, 4000, Phaser.Easing.Linear.None, true, 0, 1000, true);
         p.scale.y = 0.5;
         p.name = 'platform' + i;
         p.exists = false;
@@ -326,13 +327,17 @@ GameState.prototype.killPlatforms = function(){
     var _this = this;
 
     function callTimeout(){
+        var platform = _this.platforms.getFirstExists();
+        platform.alpha = 0;
 
+        _this.game.add.tween(platform).to( { alpha: 1 }, 2000, Phaser.Easing.Linear.None, true, 0, 1000, true);
         i = setTimeout(function(){
             callTimeout();
 
-            if (_this.player.position.y < 14200 && _this.game.time.totalElapsedSeconds() > 20) {
-                var platform = _this.platforms.getFirstExists();
-                console.log(platform);
+            if (_this.player.position.y < 14200 && Date.now() - _this.dateTimer > 20000) {
+
+                //console.log(platform);
+
                 platform.kill();
 
             }
