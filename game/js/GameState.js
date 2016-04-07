@@ -20,21 +20,21 @@ GameState.prototype.preload = function () {
 
     this.game.stage.backgroundColor = '#85b5e1';
 
-    this.game.load.baseURL = 'http://examples.phaser.io/assets/';
+    //this.game.load.baseURL = 'http://examples.phaser.io/assets/';
     this.game.load.crossOrigin = 'anonymous';
 
-    this.game.load.image('ground', 'http://localhost:63342/Phaser-Game/assets/land.png');
-    this.game.load.image('column', 'http://localhost:63342/Phaser-Game/assets/column.png');
-    this.game.load.image('platform', 'http://localhost:63342/Phaser-Game/assets/platform.png');
-    this.game.load.image('player', 'sprites/phaser-dude.png');
-    this.game.load.image('points', 'http://localhost:63342/Phaser-Game/assets/points.png');
-    this.game.load.image('timeBonus', 'http://localhost:63342/Phaser-Game/assets/timeBonus.png');
-    this.game.load.image('jumpBonus', 'http://localhost:63342/Phaser-Game/assets/jumpBonus.png');
-    this.game.load.image('timeAntiBonus', 'http://localhost:63342/Phaser-Game/assets/timeAntiBonus.png');
-    this.game.load.audio('jumpSound', 'http://localhost:63342/Phaser-Game/assets/jump.mp3');
-    this.game.load.audio('timeAntiBonusSound', 'http://localhost:63342/Phaser-Game/assets/timeAntiBonus.mp3');
-    this.game.load.audio('timeBonusSound', 'http://localhost:63342/Phaser-Game/assets/timeBonus.mp3');
-    this.game.load.audio('backgroundMusic', 'http://localhost:63342/Phaser-Game/assets/background-music.mp3');
+    this.game.load.image('ground', 'assets/land.png');
+    this.game.load.image('column', 'assets/column.png');
+    this.game.load.image('platform', 'assets/platform.png');
+    this.game.load.image('player', 'http://examples.phaser.io/assets/sprites/phaser-dude.png');
+    this.game.load.image('points', 'assets/points.png');
+    this.game.load.image('timeBonus', 'assets/timeBonus.png');
+    this.game.load.image('jumpBonus', 'assets/jumpBonus.png');
+    this.game.load.image('timeAntiBonus', 'assets/timeAntiBonus.png');
+    this.game.load.audio('jumpSound', 'assets/jump.mp3');
+    this.game.load.audio('timeAntiBonusSound', 'assets/timeAntiBonus.mp3');
+    this.game.load.audio('timeBonusSound', 'assets/timeBonus.mp3');
+    this.game.load.audio('backgroundMusic', 'assets/background-music.mp3');
 };
 
 //var textStyle = { font: '64px Desyrel', align: 'center'};
@@ -87,6 +87,7 @@ GameState.prototype.create = function () {
         var x = this.game.rnd.realInRange(50, 350);
         this.platformArray[i].reset(x,(this.land.y - i*150));
         this.platformArray[i].scale.x = this.game.rnd.realInRange(0.2, 0.4);
+
     }
 
     for(var i = 0;i < 10; i++){
