@@ -13,8 +13,8 @@ class CreateInventoryTable extends Migration
     public function up()
     {
         Schema::create('inventory', function (Blueprint $table) {
-            $table->integer('user_id')->index();
-            $table->integer('item_id')->index();
+            $table->integer('user_id');
+            $table->integer('item_id');
             $table->integer('quantity')->default(0)->unsigned();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

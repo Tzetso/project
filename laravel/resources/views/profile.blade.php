@@ -15,6 +15,10 @@
                      Email:{{$user->email}}
                 </div>
                 
+                <div class="panel-body">
+                     Highscore:{{$user->highscore}}
+                </div>
+                
                 <table class=".table-responsive">
                 	<thead>
                 		<tr>
