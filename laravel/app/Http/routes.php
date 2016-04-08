@@ -17,7 +17,7 @@ Route::get('/', function () {
 
 Route::auth();
 
-Route::get('/home', 'HomeController@index');
+Route::get('/game', 'GameController@index');
 
 Route::get('/profile', 'ProfileController@index');
 

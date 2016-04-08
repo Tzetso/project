@@ -29,8 +29,7 @@
 		                	<tr>
 								<td>{{$item->name}}</td>
 		                     	<td>{{$item->description}}</td>
-		                     	<td>{{$item->price}}</td>
-		                     	<td>{{$item->pivot->quantity}}</td>
+		                     	<td>{{intval($item->pivot->quantity)}}</td>
 		                    </tr>
 	               		@endforeach
                 	</tbody>             

@@ -6,4 +6,5 @@
 	<script type="text/javascript" src="/js/GameState.js"></script>
 	<script type="text/javascript" src="/js/GameOver.js"></script>
 	<script type="text/javascript" src="/js/game.js"></script>
+	
 @endsection

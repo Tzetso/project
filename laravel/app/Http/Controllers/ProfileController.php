@@ -29,7 +29,7 @@ class ProfileController extends Controller
     {
     	$user = Auth::user();
     	
-    	$items = $user->items();
+    	$items = $user->items;
     	
         return view('profile', compact('user', 'items'));
     }

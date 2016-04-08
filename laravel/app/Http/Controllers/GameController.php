@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Auth;
 
-class HomeController extends Controller
+class GameController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -24,6 +26,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        return view('game');
     }
 }
