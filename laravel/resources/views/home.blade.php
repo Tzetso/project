@@ -1,17 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-10 col-md-offset-1">
-            <div class="panel panel-default">
-                <div class="panel-heading">Game</div>
-
-                <div class="panel-body">
-                     Game
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+	<script type="text/javascript" src="/node_modules/phaser/dist/phaser.js"></script>
+	<script type="text/javascript" src="/js/StartMenuState.js"></script>
+	<script type="text/javascript" src="/js/GameState.js"></script>
+	<script type="text/javascript" src="/js/GameOver.js"></script>
+	<script type="text/javascript" src="/js/game.js"></script>
 @endsection
