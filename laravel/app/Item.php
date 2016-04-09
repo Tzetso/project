@@ -20,6 +20,6 @@ class Item extends Model
 	 */
 	public function users()
 	{
-		return $this->belongsToMany('App\User', 'inventory', 'item_id', 'user_id');
+		return $this->belongsToMany('App\User', 'inventory', 'item_id', 'user_id')->withPivot('quantity');
 	}
 }

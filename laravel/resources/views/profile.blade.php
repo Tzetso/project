@@ -24,7 +24,6 @@
                 		<tr>
 	                		<th>Name</th>
 	                		<th>Description</th>
-	                		<th>Price</th>
 	                		<th>Quantity</th>
                 		</tr>
                 	</thead>
@@ -33,7 +32,7 @@
 		                	<tr>
 								<td>{{$item->name}}</td>
 		                     	<td>{{$item->description}}</td>
-		                     	<td>{{intval($item->pivot->quantity)}}</td>
+		                     	<td>{{$user->items->find($item->id)->pivot->quantity}}</td>
 		                    </tr>
 	               		@endforeach
                 	</tbody>             

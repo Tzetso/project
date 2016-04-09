@@ -8,6 +8,8 @@ use App\Http\Requests;
 
 use App\Item;
 
+use Auth;
+
 class ShopController extends Controller
 {
 /**
@@ -32,4 +34,14 @@ class ShopController extends Controller
         return view('shop', compact('items'));
     }
     
+    public function buy()
+    {	
+    	
+    	$user = Auth::user();
+    	$id = request()->input('button');
+    	$inc = $user->items->find($id)->pivot->quantity + 1;
+    	$user->items->find($id)->pivot->update(['quantity' => $inc]);
+    	
+    	return back();
+    }
 }

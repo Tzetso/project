@@ -29,6 +29,6 @@ class User extends Authenticatable
      */
     public function items()
     {
-    	return $this->belongsToMany('App\Item', 'inventory', 'user_id', 'item_id');
+    	return $this->belongsToMany('App\Item', 'inventory', 'user_id', 'item_id')->withPivot('quantity');
     }
 }

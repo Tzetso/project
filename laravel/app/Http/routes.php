@@ -22,3 +22,5 @@ Route::get('/game', 'GameController@index');
 Route::get('/profile', 'ProfileController@index');
 
 Route::get('/shop', 'ShopController@index');
+
+Route::patch('/shop', 'ShopController@buy');
