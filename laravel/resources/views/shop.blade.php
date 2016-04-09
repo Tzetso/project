@@ -28,9 +28,11 @@
 										<td>{{$item->name}}</td>
 				                     	<td>{{$item->description}}</td>
 				                     	<td>{{$item->price}}</td>
-				                     	<td>
-				                     		<button name="button" value="{{$item->id}}" type="submit" class=".btn-default">Buy</button>
-				                     	</td>
+				                     	@if($money >= $item->price)
+					                     	<td>
+					                     		<button name="button" value="{{$item->id}}" type="submit" class=".btn-default">Buy</button>
+					                     	</td>
+					                    @endif
 				                    </tr>
 			               		@endforeach
 		                	</tbody>     

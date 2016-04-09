@@ -29,19 +29,24 @@ class ShopController extends Controller
      */
     public function index()
     {
+    	$user = Auth::user();
     	$items = Item::all();
+    	$money = $user->currency;
     	
-        return view('shop', compact('items'));
+        return view('shop', compact('items', 'money'));
     }
     
     public function buy()
     {	
-    	
-    	$user = Auth::user();
     	$id = request()->input('button');
+    	$user = Auth::user();    	
+    	$price = Item::find($id)->price;
+    	$money = $user->currency;		
     	$inc = $user->items->find($id)->pivot->quantity + 1;
-    	$user->items->find($id)->pivot->update(['quantity' => $inc]);
     	
+    	$user->items->find($id)->pivot->update(['quantity' => $inc]);
+    	$user->update(['currency' => $money - $price]);
+    		
     	return back();
     }
 }
