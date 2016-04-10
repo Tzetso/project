@@ -4,16 +4,14 @@ var GameState = function(game) {
     this.currentPlatformsCount = 0;
     this.platformArray = [];
     this.points = 0;
+    this.coinsQuant = 0;
     this.timer = {
         t : 3000
     }
+    this.cloudsArray = ['cloud1', 'cloud2', 'cloud3', 'cloud4', 'cloud5', 'cloud6', 'cloud7' ];
 
     this.dateTimer = null;
-    this.timeBonusArray = [];
-    this.jumpBonusArray = [];
-    this.timeAntiBonus = [];
-
-
+    this.playerPosition = 29910;
 
 };
 GameState.prototype.preload = function () {
@@ -28,6 +26,15 @@ GameState.prototype.preload = function () {
     this.game.load.image('platform', 'assets/platform.png');
     this.game.load.image('player', 'http://examples.phaser.io/assets/sprites/phaser-dude.png');
     this.game.load.image('points', 'assets/points.png');
+    this.game.load.image('coin', 'assets/coin.png');
+    this.game.load.image('background', 'assets/background.jpg');
+    this.game.load.image('cloud1', 'assets/cloud1.png');
+    this.game.load.image('cloud2', 'assets/cloud2.png');
+    this.game.load.image('cloud3', 'assets/cloud3.png');
+    this.game.load.image('cloud4', 'assets/cloud4.png');
+    this.game.load.image('cloud5', 'assets/cloud5.png');
+    this.game.load.image('cloud6', 'assets/cloud6.png');
+    this.game.load.image('cloud7', 'assets/cloud7.png');
     this.game.load.image('timeBonus', 'assets/timeBonus.png');
     this.game.load.image('jumpBonus', 'assets/jumpBonus.png');
     this.game.load.image('timeAntiBonus', 'assets/timeAntiBonus.png');
@@ -35,6 +42,7 @@ GameState.prototype.preload = function () {
     this.game.load.audio('timeAntiBonusSound', 'assets/timeAntiBonus.mp3');
     this.game.load.audio('timeBonusSound', 'assets/timeBonus.mp3');
     this.game.load.audio('backgroundMusic', 'assets/background-music.mp3');
+
 };
 
 //var textStyle = { font: '64px Desyrel', align: 'center'};
@@ -45,15 +53,18 @@ GameState.prototype.preload = function () {
 var tween;
 
 GameState.prototype.create = function () {
+    this.background = this.game.add.image(0, 0, 'background');
+    this.background.fixedToCamera = true;
+
 
     this.dateTimer = Date.now();
-    this.game.world.resize(600, 15000);
+    this.game.world.resize(600, 30000);
 
 
-    this.land = this.game.add.sprite(0,14950,'ground');
-    this.land.scale.setTo(1 ,0.7);
+    this.land = this.game.add.sprite(-50,29950,'ground');
+    this.land.scale.setTo(1 ,1);
 
-    this.leftColumn = this.game.add.sprite(0,0,'column');
+  /*  this.leftColumn = this.game.add.sprite(0,0,'column');
     this.rightColumn = this.game.add.sprite(590,0,'column');
 
     this.rightColumn.fixedToCamera = true;
@@ -61,56 +72,71 @@ GameState.prototype.create = function () {
 
     this.game.physics.arcade.enable(this.leftColumn);
     this.game.physics.arcade.enable(this.rightColumn);
-    this.game.physics.arcade.enable(this.land);
+  */  this.game.physics.arcade.enable(this.land);
 
 
-    this.rightColumn.body.immovable = true;
-    this.leftColumn.body.immovable = true;
+    //this.rightColumn.body.immovable = true;
+    //this.leftColumn.body.immovable = true;
     this.land.body.immovable = true;
 
-    this.leftColumn.body.allowGravity = true;
-    this.rightColumn.body.allowGravity = true;
+    //this.leftColumn.body.allowGravity = true;
+    //this.rightColumn.body.allowGravity = true;
     this.land.body.allowGravity = false;
 
 
-
+    this.createClouds();
     this.createPlatforms();
     this.createTimeBonuses();
     this.createTimeAntiBonuses();
+    this.createCoins();
+
 
     this.cursors = this.game.input.keyboard.addKeys( { 'up': Phaser.KeyCode.W, 'down': Phaser.KeyCode.S, 'left': Phaser.KeyCode.A, 'right': Phaser.KeyCode.D } );
     this.jumpButton = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
 
+    for(var i = 0;i < 500; i++){
+        var x = this.game.rnd.realInRange(-200, 450);
+        var y = this.game.rnd.realInRange(50, 29500);
+        var c =  this.clouds.getFirstExists(false).reset(x, y);
+        c.scale.setTo(this.game.rnd.realInRange(0.2, 1));
+    }
 
-    for(var i = 0;i < 150; i++){
+    for(var i = 0;i < 300; i++){
         this.platformArray[i] = this.platforms.getFirstExists(false);
-        var x = this.game.rnd.realInRange(50, 350);
+        var x = this.game.rnd.realInRange(-50, 400);
         this.platformArray[i].reset(x,(this.land.y - i*150));
         this.platformArray[i].scale.x = this.game.rnd.realInRange(0.2, 0.4);
-        this.randCoordinates = Math.floor(Math.random() * (370-50) + 50);
+        this.randCoordinates = Math.floor(Math.random() * 450);
         this.slidePlatformsTween = this.game.add.tween(this.platformArray[i]).to({ x: this.randCoordinates }, 1500, Phaser.Easing.Linear.None, true, 0, 1000, true);
 
     }
 
     for(var i = 0;i < 10; i++){
-        var x = this.game.rnd.realInRange(50, 350);
-        var y = this.game.rnd.realInRange(50, 13000);
+        var x = this.game.rnd.realInRange(0, 350);
+        var y = this.game.rnd.realInRange(50, 29500);
         var t =  this.timeBonuses.getFirstExists(false).reset(x, y);
-        t.scale.setTo(0.2, 0.2);
+        t.scale.setTo(0.1, 0.1);
     }
 
-    for(var i = 0;i < 20; i++){
-        var x = this.game.rnd.realInRange(50, 350);
-        var y = this.game.rnd.realInRange(50, 13000);
+    for(var i = 0;i < 30; i++){
+        var x = this.game.rnd.realInRange(0, 350);
+        var y = this.game.rnd.realInRange(50,29500);
         var t =  this.timeAntiBonuses.getFirstExists(false).reset(x, y);
-        t.scale.setTo(0.3, 0.3);
+        t.scale.setTo(0.1, 0.1);
     }
 
-    this.player = this.game.add.sprite(200, 14910, 'player');
+    for(var i = 0;i < 50; i++){
+        var x = this.game.rnd.realInRange(0, 350);
+        var y = this.game.rnd.realInRange(50,29500);
+        var c =  this.coins.getFirstExists(false).reset(x, y);
+        c.scale.setTo(0.3, 0.3);
+    }
+
+    this.player = this.game.add.sprite(200, 29910, 'player');
 
     this.game.physics.arcade.enable(this.player);
 
-    this.player.body.collideWorldBounds = false;
+    this.player.body.collideWorldBounds = true;
     this.player.body.gravity.y = 800;
     this.player.body.bounce.x = 0.6;
     this.player.body.drag.setTo(200);
@@ -123,11 +149,17 @@ GameState.prototype.create = function () {
     this.pointsImage.fixedToCamera = true;
     this.pointsImage.scale.setTo(0.12,0.12)
 
+    this.coinsImage = this.game.add.image(265, 10, 'coin');
+    this.coinsImage.fixedToCamera = true;
+    this.coinsImage.scale.setTo(0.23,0.23)
+
     var style = { font: "25px Courier", fill: '#FFF', tabs: 132 };
 
     this.text = this.game.add.text(95, 15, this.points, style);
-
     this.text.fixedToCamera = true;
+
+    this.coinText = this.game.add.text(300, 15, this.coinsQuant, style);
+    this.coinText.fixedToCamera = true;
 
     this.jumpSound = this.game.add.audio('jumpSound');
     this.timeAntiBonusSound = this.game.add.audio('timeAntiBonusSound');
@@ -156,10 +188,19 @@ GameState.prototype.update = function () {
         _this.timeBonusSound.play();
     });
 
+    this.game.physics.arcade.overlap(this.player, this.coins, function (player, coin) {
+        coin.kill();
+        _this.coinsQuant += 50;
+    });
+
     this.game.physics.arcade.overlap(this.player, this.timeAntiBonuses, function (player, timeAntiBonus) {
         timeAntiBonus.kill();
         _this.timeAntiBonusSound.play();
-        _this.timer.t -= 500;
+        _this.platforms.getFirstExists().kill();
+        _this.platforms.getFirstExists().kill();
+        _this.platforms.getFirstExists().kill();
+        _this.platforms.getFirstExists().kill();
+        _this.platforms.getFirstExists().kill();
     });
 
     this.game.physics.arcade.collide(this.player, this.land);
@@ -205,13 +246,15 @@ GameState.prototype.update = function () {
         collisionPlayer = true;
     });
 
-    if (this.player.body.position.y < this.player.previousPosition.y) {
-        this.points++;
-    } else if(this.player.body.position.y > this.player.previousPosition.y) {
-        this.points--;
+    if (this.player.body.position.y < this.playerPosition && this.player.body.touching.down) {
+        this.playerPosition = this.player.body.position.y;
+        this.points+=20;
+    } else {
+        this.points += 0;
     }
 
     this.text.setText(this.points);
+    this.coinText.setText(this.coinsQuant);
 
     //function updateTimer() {
     //    minutes = Math.floor(this.game.time.time / 60000) % 60;
@@ -242,7 +285,7 @@ GameState.prototype.createPlatforms = function(){
     this.platforms.enableBody = true;
     this.platforms.physicsBodyType = Phaser.Physics.ARCADE;
 
-    for (var i = 0; i < 150; i++)
+    for (var i = 0; i < 300; i++)
     {
         var p = this.platforms.create(0, 0, 'platform');
 
@@ -262,6 +305,28 @@ GameState.prototype.createPlatforms = function(){
         }, this);
         if(p.y - this.land.y){
             p.kill();
+        }
+    }
+
+
+};
+GameState.prototype.createClouds = function(){
+
+    this.clouds = this.game.add.group();
+    var cloudImageIndex = null;
+    for (var i = 0; i < 500 ; i++) {
+        cloudImageIndex = parseInt(Math.random() * (this.cloudsArray.length - 1))
+        var cloud = this.clouds.create(0, 0, this.cloudsArray[cloudImageIndex]);
+        cloud.scale.y = 0.5;
+        cloud.name = 'cloud' + i;
+        cloud.exists = false;
+        cloud.visible = true;
+
+        cloud.events.onOutOfBounds.add(function(tB){
+            cloud.kill();
+        }, this);
+        if(cloud.y - this.land.y){
+            cloud.kill();
         }
     }
 
@@ -291,6 +356,33 @@ GameState.prototype.createTimeBonuses = function(){
             tB.kill();
         }
     }
+
+
+};
+
+GameState.prototype.createCoins = function(){
+
+    this.coins = this.game.add.group();
+    this.coins.enableBody = true;
+    this.coins.physicsBodyType = Phaser.Physics.ARCADE;
+
+    for (var i = 0; i < 150; i++)
+    {
+        var cn = this.coins.create(0, 0, 'coin');
+        cn.scale.y = 0.5;
+        cn.name = 'coin' + i;
+        cn.exists = false;
+        cn.visible = false;
+        cn.checkWorldBounds = true;
+        cn.events.onOutOfBounds.add(function(cn){
+            cn.kill();
+        }, this);
+        if(cn.y - this.land.y){
+            cn.kill();
+        }
+        console.log(this.coins);
+    }
+
 
 
 };
@@ -336,20 +428,20 @@ GameState.prototype.killPlatforms = function(){
         i = setTimeout(function(){
             callTimeout();
 
-            if (_this.player.position.y < 14200 && Date.now() - _this.dateTimer > 20000) {
+            if (_this.player.position.y < 29800 && Date.now() - _this.dateTimer > 10000) {
 
                 //console.log(platform);
 
                 platform.kill();
 
             }
-            if (Date.now() - _this.dateTimer > 20000 && _this.player.position.y > _this.platforms.getFirstExists().position.y) {
-                console.log(_this.player.position.y > _this.platforms.getFirstExists().position.y);
+            if (Date.now() - _this.dateTimer > 5000 && _this.player.position.y > _this.platforms.getFirstExists().position.y) {
+                //console.log(_this.player.position.y > _this.platforms.getFirstExists().position.y);
                 _this.killPlayer();
 
                 clearTimeout(i)
             }
-            _this.timer.t -= 200;
+            _this.timer.t -= 500;
 /*            console.log(_this.player);
             console.log(t);
             console.log(_this.game.time.totalElapsedSeconds());*/
@@ -368,7 +460,9 @@ GameState.prototype.killPlatforms = function(){
 GameState.prototype.killPlayer = function() {
     this.game.state.start('end-game-state');
     this.game.stats = this.points;
+    this.game.coinsCollected = this.coinsQuant;
     console.log('GAME OVER');
     this.points = 0;
+    this.coins = 0;
 };
 

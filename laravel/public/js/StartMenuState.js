@@ -6,9 +6,9 @@ var StartMenuState = function(game) {
 StartMenuState.prototype.preload = function () {
 
     this.game.stage.backgroundColor = '#000000';
-    this.game.load.image('timeBonus', 'http://localhost:63342/Phaser-Game/assets/timeBonus.png');
-    this.game.load.image('timeAntiBonus', 'http://localhost:63342/Phaser-Game/assets/timeAntiBonus.png');
-    this.game.load.image('jumpBonus', 'http://localhost:63342/Phaser-Game/assets/jumpBonus.png');
+    this.game.load.image('timeBonus', 'assets/timeBonus.png');
+    this.game.load.image('timeAntiBonus', 'assets/timeAntiBonus.png');
+    this.game.load.image('jumpBonus', 'assets/jumpBonus.png');
 
 
 };
@@ -48,7 +48,7 @@ StartMenuState.prototype.create = function () {
     }, this);
 
     this.timeBonusImage = this.game.add.image(150, this.game.world.centerY - 100 , 'timeBonus');
-    this.timeBonusImage.scale.setTo(0.5, 0.5);
+    this.timeBonusImage.scale.setTo(0.1, 0.1);
     this.style = { font: "15px Courier", fill: '#FF8000', fontWeight : 'bold', tabs: 132 };
     this.timeBonusText = this.game.add.text(220, this.game.world.centerY - 90, 'Collect smilies to slow down' + '\n' + 'platforms destruction!', this.style);
 
@@ -59,9 +59,9 @@ StartMenuState.prototype.create = function () {
     this.jumpBonusText = this.game.add.text(220, this.game.world.centerY - 30, 'Collect jump bonuses to' + '\n' + 'jump higher for 10 sec!', this.style);
 
     this.timeAntiBonusImage = this.game.add.image(150, this.game.world.centerY + 20 , 'timeAntiBonus');
-    this.timeAntiBonusImage.scale.setTo(0.5, 0.5);
+    this.timeAntiBonusImage.scale.setTo(0.1, 0.1);
     this.style = { font: "15px Courier", fill: '#FF8000', fontWeight : 'bold', tabs: 132 };
-    this.timeAntiBonusText = this.game.add.text(220, this.game.world.centerY + 30, 'Avoid skulls! They make platforms' + '\n' + 'disappear faster for 10 sec!', this.style);
+    this.timeAntiBonusText = this.game.add.text(220, this.game.world.centerY + 30, 'Avoid skulls! They make the' + '\n' + 'lowest 5 platforms disappear!', this.style);
 
 };
 
