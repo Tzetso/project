@@ -32,6 +32,8 @@
 					                     	<td>
 					                     		<button name="button" value="{{$item->id}}" type="submit" class=".btn-default">Buy</button>
 					                     	</td>
+					                    @else
+					                     	<td>No cash</td>
 					                    @endif
 				                    </tr>
 			               		@endforeach
