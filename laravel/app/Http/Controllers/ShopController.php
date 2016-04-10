@@ -44,8 +44,10 @@ class ShopController extends Controller
     	$money = $user->currency;		
     	$inc = $user->items->find($id)->pivot->quantity + 1;
     	
-    	$user->items->find($id)->pivot->update(['quantity' => $inc]);
-    	$user->update(['currency' => $money - $price]);
+    	if($money >= $price){
+    		$user->items->find($id)->pivot->update(['quantity' => $inc]);
+    		$user->update(['currency' => $money - $price]);
+    	}   	
     		
     	return back();
     }
