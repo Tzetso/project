@@ -15,7 +15,6 @@ var Icy_tower = function () {
         game.state.start('start-menu');
     });
 
-
     gameState = new GameState(game);
     game.state.add('game-state', gameState, false);
 

@@ -54,11 +54,6 @@ GameOverMenuState.prototype.create = function () {
         console.log('GAME OVER')
     }, this);
 
-
-
-
-
-
 };
 GameOverMenuState.prototype.update = function () {
 

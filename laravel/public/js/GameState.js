@@ -380,7 +380,6 @@ GameState.prototype.createCoins = function(){
         if(cn.y - this.land.y){
             cn.kill();
         }
-        console.log(this.coins);
     }
 
 
@@ -396,7 +395,7 @@ GameState.prototype.createTimeAntiBonuses = function(){
     for (var i = 0; i < 150; i++)
     {
         var tAB = this.timeAntiBonuses.create(0, 0, 'timeAntiBonus');
-        tAB.scale.y = 0.5;
+        tAB.scale.y = 0.4;
         tAB.name = 'timeBonus' + i;
         tAB.exists = false;
         tAB.visible = false;
@@ -460,9 +459,13 @@ GameState.prototype.killPlatforms = function(){
 GameState.prototype.killPlayer = function() {
     this.game.state.start('end-game-state');
     this.game.stats = this.points;
+    if(DataManager.getInternalData().highscore < this.points){
+        DataManager.postHighscore(this.points);
+        console.log(this.points);
+    }
     this.game.coinsCollected = this.coinsQuant;
     console.log('GAME OVER');
     this.points = 0;
-    this.coins = 0;
+    this.coinsQuant = 0;
 };
 

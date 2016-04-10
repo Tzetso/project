@@ -19,6 +19,7 @@ Route::auth();
 
 Route::get('/game', 'GameController@index');
 Route::get('/getscore', 'GameController@getScore');
+Route::post('/postscore', 'GameController@postScore');
 
 Route::get('/profile', 'ProfileController@index');
 
