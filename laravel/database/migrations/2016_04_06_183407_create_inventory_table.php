@@ -15,8 +15,8 @@ class CreateInventoryTable extends Migration
         if(!Schema::hasTable('inventory')){
         	
         	Schema::create('inventory', function (Blueprint $table) {
-	            $table->integer('user_id');
-	            $table->integer('item_id');
+	            $table->integer('user_id')->unsigned();
+	            $table->integer('item_id')->unsigned();
 	            $table->integer('quantity')->default(0)->unsigned();
 	
 	            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

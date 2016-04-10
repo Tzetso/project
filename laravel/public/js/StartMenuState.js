@@ -1,6 +1,7 @@
-var StartMenuState = function(game) {
+var StartMenuState = function(game,data) {
 
     this.game = game;
+    console.log("MDF ",data)
 
 };
 StartMenuState.prototype.preload = function () {

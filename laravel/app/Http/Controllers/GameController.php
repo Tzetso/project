@@ -26,8 +26,16 @@ class GameController extends Controller
      */
     public function index()
     {
-    	$highscore = response()->json(array("highscore" => Auth::user()->highscore));
-    	
-        return view('game', compact('highscore'));
+
+        return view('game');
+    }
+
+    public function getScore()
+    {
+    	$highscore = response()->json([
+    	"highscore" => Auth::user()->highscore
+    	]);
+
+        return $highscore;
     }
 }

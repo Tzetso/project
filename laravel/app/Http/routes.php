@@ -18,6 +18,7 @@ Route::get('/', function () {
 Route::auth();
 
 Route::get('/game', 'GameController@index');
+Route::get('/getscore', 'GameController@getScore');
 
 Route::get('/profile', 'ProfileController@index');
 

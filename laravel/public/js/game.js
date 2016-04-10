@@ -3,13 +3,18 @@
  */
 var Icy_tower = function () {
 
+
+
     var game = new Phaser.Game(640  , 480 , Phaser.CANVAS, 'game');
     var startMenuState = null;
     var gameState = null;
     var endGameState = null;
+    DataManager.getHightScore(function(data){
+        startMenuState = new StartMenuState(game,data);
+        game.state.add('start-menu', startMenuState, false);
+        game.state.start('start-menu');
+    });
 
-    startMenuState = new StartMenuState(game);
-    game.state.add('start-menu', startMenuState, false);
 
     gameState = new GameState(game);
     game.state.add('game-state', gameState, false);
@@ -17,14 +22,14 @@ var Icy_tower = function () {
     endGameState = new GameOverMenuState(game);
     game.state.add('end-game-state', endGameState, false);
 
-    return {
+    /*return {
         init:function () {
             game.state.start('start-menu');
         }
 
-    }
+    }*/
 
 
 }();
 
-Icy_tower.init();
+/*Icy_tower.init();*/
