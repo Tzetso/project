@@ -16,7 +16,7 @@ class GameController extends Controller
      */
     public function __construct()
     {
-        //$this->middleware('auth');
+        $this->middleware('auth');
     }
 
     /**
@@ -38,8 +38,12 @@ class GameController extends Controller
 
         return $highscore;
     }
+    
     public function postScore()
     {
-    	var_dump( $_POST);
+    	$user = Auth::user();
+    	$score = request()->input('score');
+    	$user->highscore = $score;
+    	$user->save;
     }
 }
