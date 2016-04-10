@@ -16,19 +16,19 @@ class UsersTableSeeder extends Seeder
         		'username' => 'User',
         		'email' => 'mail@site.com',
         		'password' => bcrypt('password'),
-        		'currency' => 1000
+        		'currency' => 3000
         ],
         [
         		'username' => 'Potrebitel',
         		'email' => 'mail@site.bg',
         		'password' => bcrypt('parola'),
-        		'currency' => 1000
+        		'currency' => 5000
         ],
         [
         		'username' => 'Peala',
         		'email' => 'peala@mail.com',
         		'password' => bcrypt('v171717p'),
-        		'currency' => 1000
+        		'currency' => 10000
         ]  		
         ]);
     }

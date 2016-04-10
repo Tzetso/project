@@ -31,9 +31,10 @@ class ShopController extends Controller
     {
     	$user = Auth::user();
     	$items = Item::all();
+    	$skins = Item::all()->where('cosmetic', '1');
     	$money = $user->currency;
     	
-        return view('shop', compact('items', 'money'));
+        return view('shop', compact('user', 'items', 'money', 'skins'));
     }
     
     public function buy()
@@ -42,10 +43,17 @@ class ShopController extends Controller
     	$user = Auth::user();    	
     	$price = Item::find($id)->price;
     	$money = $user->currency;		
-    	$inc = $user->items->find($id)->pivot->quantity + 1;
+    	
     	
     	if($money >= $price){
-    		$user->items->find($id)->pivot->update(['quantity' => $inc]);
+    		
+    		if(Item::find($id)->cosmetic != 0){
+    			$user->items()->attach($id);
+    		}else{
+    			$inc = $user->items->find($id)->pivot->quantity + 1;
+    			$user->items->find($id)->pivot->update(['quantity' => $inc]); 			
+    		}   		
+    		
     		$user->update(['currency' => $money - $price]);
     	}   	
     		
