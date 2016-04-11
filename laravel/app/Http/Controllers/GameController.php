@@ -36,10 +36,13 @@ class GameController extends Controller
     	"highscore" => Auth::user()->highscore
     	]);
 
-        return $highscore;
+        return Auth::user()->highscore;
     }
     public function postScore()
     {
-    	var_dump( $_POST);
+    	$user = Auth::user();
+            	$score = request()->input('score');
+            	$user->highscore = $score;
+            	$user->save;
     }
 }

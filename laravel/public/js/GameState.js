@@ -12,6 +12,7 @@ var GameState = function(game) {
 
     this.dateTimer = null;
     this.playerPosition = 29910;
+    this.platformsLeft = 0;
 
 };
 GameState.prototype.preload = function () {
@@ -20,28 +21,6 @@ GameState.prototype.preload = function () {
 
     //this.game.load.baseURL = 'http://examples.phaser.io/assets/';
     this.game.load.crossOrigin = 'anonymous';
-
-    this.game.load.image('ground', 'assets/land.png');
-    this.game.load.image('column', 'assets/column.png');
-    this.game.load.image('platform', 'assets/platform.png');
-    this.game.load.image('player', 'http://examples.phaser.io/assets/sprites/phaser-dude.png');
-    this.game.load.image('points', 'assets/points.png');
-    this.game.load.image('coin', 'assets/coin.png');
-    this.game.load.image('background', 'assets/background.jpg');
-    this.game.load.image('cloud1', 'assets/cloud1.png');
-    this.game.load.image('cloud2', 'assets/cloud2.png');
-    this.game.load.image('cloud3', 'assets/cloud3.png');
-    this.game.load.image('cloud4', 'assets/cloud4.png');
-    this.game.load.image('cloud5', 'assets/cloud5.png');
-    this.game.load.image('cloud6', 'assets/cloud6.png');
-    this.game.load.image('cloud7', 'assets/cloud7.png');
-    this.game.load.image('timeBonus', 'assets/timeBonus.png');
-    this.game.load.image('jumpBonus', 'assets/jumpBonus.png');
-    this.game.load.image('timeAntiBonus', 'assets/timeAntiBonus.png');
-    this.game.load.audio('jumpSound', 'assets/jump.mp3');
-    this.game.load.audio('timeAntiBonusSound', 'assets/timeAntiBonus.mp3');
-    this.game.load.audio('timeBonusSound', 'assets/timeBonus.mp3');
-    this.game.load.audio('backgroundMusic', 'assets/background-music.mp3');
 
 };
 
@@ -91,6 +70,7 @@ GameState.prototype.create = function () {
     this.createCoins();
 
 
+
     this.cursors = this.game.input.keyboard.addKeys( { 'up': Phaser.KeyCode.W, 'down': Phaser.KeyCode.S, 'left': Phaser.KeyCode.A, 'right': Phaser.KeyCode.D } );
     this.jumpButton = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
 
@@ -108,7 +88,6 @@ GameState.prototype.create = function () {
         this.platformArray[i].scale.x = this.game.rnd.realInRange(0.2, 0.4);
         this.randCoordinates = Math.floor(Math.random() * 450);
         this.slidePlatformsTween = this.game.add.tween(this.platformArray[i]).to({ x: this.randCoordinates }, 1500, Phaser.Easing.Linear.None, true, 0, 1000, true);
-
     }
 
     for(var i = 0;i < 10; i++){
@@ -122,7 +101,7 @@ GameState.prototype.create = function () {
         var x = this.game.rnd.realInRange(0, 350);
         var y = this.game.rnd.realInRange(50,29500);
         var t =  this.timeAntiBonuses.getFirstExists(false).reset(x, y);
-        t.scale.setTo(0.1, 0.1);
+        t.scale.setTo(0.08, 0.08);
     }
 
     for(var i = 0;i < 50; i++){
@@ -167,6 +146,8 @@ GameState.prototype.create = function () {
     this.backgroundMusic = this.game.add.audio('backgroundMusic');
 
     this.backgroundMusic.play();
+
+
 
 
 };
@@ -253,17 +234,9 @@ GameState.prototype.update = function () {
         this.points += 0;
     }
 
+
     this.text.setText(this.points);
     this.coinText.setText(this.coinsQuant);
-
-    //function updateTimer() {
-    //    minutes = Math.floor(this.game.time.time / 60000) % 60;
-    //    seconds = Math.floor(this.game.time.time / 1000) % 60;
-    //    milliseconds = Math.floor(this.game.time.time) % 100;
-    //};
-    //
-    //updateTimer()
-
 
 };
 GameState.prototype.render = function(){
@@ -273,9 +246,6 @@ GameState.prototype.render = function(){
     //    console.log(h);
     //}
 
-
-    //var timeText = this.game.add.bitmapText(200, 100, 'desyrel', 'Phaser & Pixi\nrocking!', 32, 32);
-    //timeText = 'Elapsed seconds: ' + Math.round(this.game.time.totalElapsedSeconds());
 };
 
 
@@ -310,6 +280,8 @@ GameState.prototype.createPlatforms = function(){
 
 
 };
+
+
 GameState.prototype.createClouds = function(){
 
     this.clouds = this.game.add.group();
@@ -346,7 +318,8 @@ GameState.prototype.createTimeBonuses = function(){
         tB.name = 'timeBonus' + i;
         tB.exists = false;
         tB.visible = false;
-        tB.checkWorldBounds = true;
+        tB.body.checkCollision.down = false;
+        tB.body.checkCollision.up = false;
         //tB.body.immovable = true;
         //console.log(tB.body);
         tB.events.onOutOfBounds.add(function(tB){
@@ -373,7 +346,8 @@ GameState.prototype.createCoins = function(){
         cn.name = 'coin' + i;
         cn.exists = false;
         cn.visible = false;
-        cn.checkWorldBounds = true;
+        cn.body.checkCollision.down = false;
+        cn.body.checkCollision.up = false;
         cn.events.onOutOfBounds.add(function(cn){
             cn.kill();
         }, this);
@@ -399,7 +373,8 @@ GameState.prototype.createTimeAntiBonuses = function(){
         tAB.name = 'timeBonus' + i;
         tAB.exists = false;
         tAB.visible = false;
-        tAB.checkWorldBounds = true;
+        tAB.body.checkCollision.down = false;
+        tAB.body.checkCollision.up = false;
         //tAB.body.immovable = true;
         //console.log(tB.body);
         tAB.events.onOutOfBounds.add(function(tAB){
@@ -461,7 +436,6 @@ GameState.prototype.killPlayer = function() {
     this.game.stats = this.points;
     if(DataManager.getInternalData().highscore < this.points){
         DataManager.postHighscore(this.points);
-        console.log(this.points);
     }
     this.game.coinsCollected = this.coinsQuant;
     console.log('GAME OVER');
