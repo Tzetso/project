@@ -42,10 +42,8 @@
 				                	<tr>
 										<td>{{$skin->name}}</td>
 				                     	<td>{{$skin->description}}</td>
-				                     	<td>{{$skin->price}}</td>
-				                     	@if($user->items->contains($skin->id))
-				                     		<td>Already bought</td>
-				                     	@ifelse($money >= $skin->price)
+				                     	<td>{{$skin->price}}</td>				                     	
+				                     	@if($money >= $skin->price)
 					                     	<td>
 					                     		<button name="button" value="{{$skin->id}}" type="submit" class=".btn-default">Buy</button>
 					                     	</td>

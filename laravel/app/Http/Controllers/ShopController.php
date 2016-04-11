@@ -8,6 +8,8 @@ use App\Http\Requests;
 
 use App\Item;
 
+use DB;
+
 use Auth;
 
 class ShopController extends Controller
@@ -21,6 +23,20 @@ class ShopController extends Controller
     {
         $this->middleware('auth');
     }
+    
+    private function getSkins()
+    {
+    	$user = Auth::user();
+    	$skins = Item::where('cosmetic', '=', '1')->get();
+    	$onsale = [];
+    	foreach($skins as $skin){
+    		if($user->items->contains($skin->id) == false){
+    			$onsale[] = $skin;
+    		}
+    	}
+    	
+    	return $onsale;
+    }
 
     /**
      * Show the shop.
@@ -30,8 +46,9 @@ class ShopController extends Controller
     public function index()
     {
     	$user = Auth::user();
-    	$items = Item::all();
-    	$skins = Item::all()->where('cosmetic', '1');
+    	$items = Item::where('cosmetic', '=', '0')->get();    	
+		$skins = $this->getSkins();
+
     	$money = $user->currency;
     	
         return view('shop', compact('user', 'items', 'money', 'skins'));
@@ -48,7 +65,9 @@ class ShopController extends Controller
     	if($money >= $price){
     		
     		if(Item::find($id)->cosmetic != 0){
-    			$user->items()->attach($id);
+    			if($user->items->contains($id) == false){
+    				$user->items()->attach($id);
+    			}  			
     		}else{
     			$inc = $user->items->find($id)->pivot->quantity + 1;
     			$user->items->find($id)->pivot->update(['quantity' => $inc]); 			
