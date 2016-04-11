@@ -26,26 +26,25 @@ class GameController extends Controller
      */
     public function index()
     {
-
         return view('game');
     }
 
     public function getData()
     {
-    	$highscore = response()->json([
-    	"highscore" => Auth::user()->highscore
+    	$data = response()->json([
+    		"highscore" => Auth::user()->highscore
     	]);
 
-        return Auth::user()->highscore;
+        return $data;
     }
     
     public function postChanges()
     {
-    	$user = Auth::user();
+    	$user = Auth::user(); 
     	if(request()->input('score')){
     		$user->highscore = request()->input('score');
     	}
-
+		
     	$user->currency += request()->input('coin');
     	$user->save;
     }

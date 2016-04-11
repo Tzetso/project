@@ -13,7 +13,7 @@ var DataManager = function($){
     return{
         getHightScore:function (fn) {
             $.get('getdata',function(data){
-                score = data;
+                score = data.highscore;
                 console.log(score,'score')
                 fn(data);
             });
@@ -29,7 +29,7 @@ var DataManager = function($){
         },
         postCoins: function (coins) {
             console.log(coins)
-            $.post('postscore',{coin:coins},function(){
+            $.post('game',{coin:coins},function(){
                 console.log('Data sent');
             });
         }
