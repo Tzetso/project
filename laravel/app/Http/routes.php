@@ -11,12 +11,9 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Route::auth();
 
+Route::get('/', 'WelcomeController@index');
 Route::get('/game', 'GameController@index');
 Route::get('/getscore', 'GameController@getScore');
 Route::post('/postscore', 'GameController@postScore');
@@ -24,7 +21,5 @@ Route::post('/postscore', 'GameController@postScore');
 Route::get('/profile', 'ProfileController@index');
 
 Route::get('/shop', 'ShopController@index');
-
 Route::patch('/shop', 'ShopController@buy');
 
-//Route::group()

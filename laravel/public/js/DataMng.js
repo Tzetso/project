@@ -21,9 +21,15 @@ var DataManager = function($){
         getInternalData:function () {
             return score;
         },
-        postHighscore: function (scores) {
-            console.log(scores)
-            $.post('postscore',{score:scores},function(){
+        postHighscore: function (scores, coins) {
+            console.log(scores, coins)
+            $.post('postscore',{score:scores, coin:coins},function(){
+                console.log('Data sent');
+            });
+        },
+        postCoins: function (coins) {
+            console.log(coins)
+            $.post('postscore',{coin:coins},function(){
                 console.log('Data sent');
             });
         }

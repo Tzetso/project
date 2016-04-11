@@ -21,6 +21,20 @@ class ShopController extends Controller
     {
         $this->middleware('auth');
     }
+    
+    private function getSkins()
+    {
+    	$user = Auth::user();
+    	$skins = Item::where('cosmetic', '=', '1')->get();
+    	$onsale = [];
+    	foreach($skins as $skin){
+    		if($user->items->contains($skin->id) == false){
+    			$onsale[] = $skin;
+    		}
+    	}
+    	
+    	return $onsale;
+    }
 
     /**
      * Show the shop.
@@ -30,10 +44,12 @@ class ShopController extends Controller
     public function index()
     {
     	$user = Auth::user();
-    	$items = Item::all();
+    	$items = Item::where('cosmetic', '=', '0')->get();    	
+		$skins = $this->getSkins();
+
     	$money = $user->currency;
     	
-        return view('shop', compact('items', 'money'));
+        return view('shop', compact('user', 'items', 'money', 'skins'));
     }
     
     public function buy()
@@ -42,10 +58,19 @@ class ShopController extends Controller
     	$user = Auth::user();    	
     	$price = Item::find($id)->price;
     	$money = $user->currency;		
-    	$inc = $user->items->find($id)->pivot->quantity + 1;
+    	
     	
     	if($money >= $price){
-    		$user->items->find($id)->pivot->update(['quantity' => $inc]);
+    		
+    		if(Item::find($id)->cosmetic != 0){
+    			if($user->items->contains($id) == false){
+    				$user->items()->attach($id);
+    			}  			
+    		}else{
+    			$inc = $user->items->find($id)->pivot->quantity + 1;
+    			$user->items->find($id)->pivot->update(['quantity' => $inc]); 			
+    		}   		
+    		
     		$user->update(['currency' => $money - $price]);
     	}   	
     		

@@ -13,6 +13,27 @@
                 	@else                 
                     	Sup {{ Auth::user()->username}}
                     @endif
+                    
+                    <table class=".table-responsive">		                
+	                	<thead>		                	
+	                		<tr>
+		                		<th>No</th>
+		                		<th>Name</th>
+		                		<th>Score</th>
+	                		</tr>		                		
+	                	</thead>
+	                	
+	                	<tbody>
+                    @foreach($users as $user)
+	                	<tr>
+	                		<td>{{++$count}}</td>
+							<td>{{$user->username}}</td>
+	                     	<td>{{$user->highscore}}</td>	                     	
+	                    </tr>
+               		@endforeach
+                    	</tbody>     
+		                	        
+		           	</table>
                 </div>
             </div>
         </div>

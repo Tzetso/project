@@ -18,6 +18,7 @@ class CreateItemsTable extends Migration
             $table->text('description');
             $table->integer('price')->unsigned();
             $table->string('picture');
+            $table->boolean('cosmetic');
         });
     }
 

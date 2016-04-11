@@ -33,7 +33,22 @@
 					                     		<button name="button" value="{{$item->id}}" type="submit" class=".btn-default">Buy</button>
 					                     	</td>
 					                    @else
-					                     	<td>No cash</td>
+					                     	<td>Not enough cash</td>
+					                    @endif
+				                    </tr>
+			               		@endforeach
+			               		
+			               		@foreach($skins as $skin)
+				                	<tr>
+										<td>{{$skin->name}}</td>
+				                     	<td>{{$skin->description}}</td>
+				                     	<td>{{$skin->price}}</td>				                     	
+				                     	@if($money >= $skin->price)
+					                     	<td>
+					                     		<button name="button" value="{{$skin->id}}" type="submit" class=".btn-default">Buy</button>
+					                     	</td>
+					                    @else
+					                     	<td>Not enough cash</td>
 					                    @endif
 				                    </tr>
 			               		@endforeach
