@@ -8,16 +8,16 @@
                 <div class="panel-heading">Welcome</div>
 
                 <div class="panel-body">
-                	@if(Auth::guest()) 
-                		Sup Guest
+                	@if($user) 
+                		Sup {{ $user->username}}
                 	@else                 
-                    	Sup {{ Auth::user()->username}}
+                    	Sup guest
                     @endif
                     
                     <table class=".table-responsive">		                
 	                	<thead>		                	
 	                		<tr>
-		                		<th>No</th>
+		                		<th>#</th>
 		                		<th>Name</th>
 		                		<th>Score</th>
 	                		</tr>		                		

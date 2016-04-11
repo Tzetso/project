@@ -42,17 +42,11 @@ class GameController extends Controller
     public function postScore()
     {
     	$user = Auth::user();
-<<<<<<< HEAD
-            	$score = request()->input('score');
-            	$user->highscore = $score;
-            	$user->save;
-=======
     	if(request()->input('score')){
     		$user->highscore = request()->input('score');
     	}   	
     	
     	$user->currency += request()->input('coin');
     	$user->save;
->>>>>>> 873b3ce26cf2899a690d0db26e2981afd33516d6
     }
 }
