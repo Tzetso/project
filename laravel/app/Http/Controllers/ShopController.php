@@ -8,8 +8,6 @@ use App\Http\Requests;
 
 use App\Item;
 
-use DB;
-
 use Auth;
 
 class ShopController extends Controller
