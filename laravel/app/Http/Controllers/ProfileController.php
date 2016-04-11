@@ -29,8 +29,54 @@ class ProfileController extends Controller
     {
     	$user = Auth::user();
     	
-    	$items = $user->items;
+    	$items = $user->items->where('cosmetic', 0);
     	
-        return view('profile', compact('user', 'items'));
+    	$skins = $user->items->where('cosmetic', 1);
+    	
+    	foreach($skins as $skin){
+			if($skin->pivot->quantity > 0){  
+				$avatar = $skin;
+				break;
+			}
+    	}
+    	
+        return view('profile', compact('user', 'items', 'avatar'));
+    }
+    
+    public function skins()
+    {
+    	$user = Auth::user();
+    	
+    	$skins = $user->items->where('cosmetic', 1);
+    	 
+    	foreach($skins as $skin){
+    		if($skin->pivot->quantity > 0){
+    			$avatar = $skin;
+    			break;
+    		}
+    	}
+    	 
+    	return view('skins', compact('user', 'skins', 'avatar'));
+    }
+    
+    public function changeSkin()
+    {
+    	$id = request()->input('skin');
+    	$user = Auth::user();
+    	$skins = $user->items->where('cosmetic', 1);
+    	
+    	foreach($skins as $skin){
+    		if($skin->pivot->quantity > 0){
+    			$avatar = $skin;
+    			break;
+    		}
+    	}
+    	
+    	if($avatar->id != $id){
+    		$user->items->find($avatar->id)->pivot->update(['quantity' => 0]);
+    		$user->items->find($id)->pivot->update(['quantity' => 1]);
+    	}
+    	
+    	return redirect('/profile');
     }
 }

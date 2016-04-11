@@ -20,24 +20,17 @@ class ItemsTableSeeder extends Seeder
         		'cosmetic' => '1'
         ],
         [
-        		'name' => 'Cheap Item',
-        		'description' => 'This is a cheap item.',
-        		'price' => 250,
-        		'picture' => '',
-        		'cosmetic' => 0
-        ],
-        [
-        		'name' => 'Average Item',
-        		'description' => 'This is an average item.',
+        		'name' => 'Shield',
+        		'description' => 'This defends against skulls.',
         		'price' => 500,
-        		'picture' => '',
+        		'picture' => 'assets/shield.png',
         		'cosmetic' => 0
         ],
         [
-        		'name' => 'Expensive Item',
-        		'description' => 'This is an expensive item.',
+        		'name' => 'Revive',
+        		'description' => 'This revives the player after death.',
         		'price' => 1000,
-        		'picture' => '',
+        		'picture' => 'assets/revive.png',
         		'cosmetic' => 0
         ],
         [

@@ -22,9 +22,8 @@ class ShopController extends Controller
         $this->middleware('auth');
     }
     
-    private function getSkins()
+    private function getSkins($user)
     {
-    	$user = Auth::user();
     	$skins = Item::where('cosmetic', '=', '1')->get();
     	$onsale = [];
     	foreach($skins as $skin){
@@ -45,7 +44,7 @@ class ShopController extends Controller
     {
     	$user = Auth::user();
     	$items = Item::where('cosmetic', '=', '0')->get();    	
-		$skins = $this->getSkins();
+		$skins = $this->getSkins($user);
 
     	$money = $user->currency;
     	
