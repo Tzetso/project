@@ -46,6 +46,6 @@ class GameController extends Controller
     	}
 		
     	$user->currency += request()->input('coin');
-    	$user->save;
+    	$user->save();
     }
 }

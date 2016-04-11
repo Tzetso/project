@@ -436,7 +436,7 @@ GameState.prototype.killPlayer = function() {
     this.game.stats = this.points;
     this.game.coinsCollected = this.coinsQuant;
     
-    if(DataManager.getInternalData() < this.points){
+    if(DataManager.getScore() < this.points){
     	DataManager.postHighscore(this.points, this.coinsQuant);
         console.log(this.points, this.coinsQuant);
     }else{

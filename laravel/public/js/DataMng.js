@@ -18,7 +18,7 @@ var DataManager = function($){
                 fn(data);
             });
         },
-        getInternalData:function () {
+        getScore:function () {
             return score;
         },
         postHighscore: function (scores, coins) {
