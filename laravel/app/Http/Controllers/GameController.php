@@ -30,7 +30,7 @@ class GameController extends Controller
         return view('game');
     }
 
-    public function getScore()
+    public function getData()
     {
     	$highscore = response()->json([
     	"highscore" => Auth::user()->highscore
@@ -39,7 +39,7 @@ class GameController extends Controller
         return Auth::user()->highscore;
     }
     
-    public function postScore()
+    public function postChanges()
     {
     	$user = Auth::user();
     	if(request()->input('score')){

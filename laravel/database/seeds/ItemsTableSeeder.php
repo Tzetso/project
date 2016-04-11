@@ -13,6 +13,13 @@ class ItemsTableSeeder extends Seeder
     {
         DB::table('items')->insert([
         [
+        		'name' => 'Phaser Dude',
+        		'description' => 'This is your default skin.',
+        		'price' => 0,
+        		'picture' => 'assets/phaser-dude.png',
+        		'cosmetic' => '1'
+        ],
+        [
         		'name' => 'Cheap Item',
         		'description' => 'This is a cheap item.',
         		'price' => 250,
@@ -37,16 +44,17 @@ class ItemsTableSeeder extends Seeder
         		'name' => 'Clown',
         		'description' => 'Wanna know how I got these scars?',
         		'price' => 2000,
-        		'picture' => 'assets/clown',
+        		'picture' => 'assets/clown.png',
         		'cosmetic' => 1
         ],
         [
-  	    		'name' => 'Premium Cosmetic Item ',
+  	    		'name' => 'Lemming',
         		'description' => 'This is a premium cosmetic item.',
         		'price' => 5000,
-        		'picture' => '',
+        		'picture' => 'assets/lemming.png',
         		'cosmetic' => 1
-        ]
+        ],
+        
         ]);
     }
 }

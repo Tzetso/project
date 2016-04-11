@@ -14,9 +14,11 @@
 Route::auth();
 
 Route::get('/', 'WelcomeController@index');
+
 Route::get('/game', 'GameController@index');
-Route::get('/getscore', 'GameController@getScore');
-Route::post('/postscore', 'GameController@postScore');
+Route::post('/game', 'GameController@postChanges');
+Route::get('/getdata', 'GameController@getData');
+
 
 Route::get('/profile', 'ProfileController@index');
 
