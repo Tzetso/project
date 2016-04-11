@@ -34,10 +34,10 @@ class ItemsTableSeeder extends Seeder
         		'cosmetic' => 0
         ],
         [
-        		'name' => 'Cosmetic Item',
-        		'description' => 'This is a cosmetic item.',
+        		'name' => 'Clown',
+        		'description' => 'Wanna know how I got these scars?',
         		'price' => 2000,
-        		'picture' => '',
+        		'picture' => 'assets/clown',
         		'cosmetic' => 1
         ],
         [

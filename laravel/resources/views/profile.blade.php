@@ -19,6 +19,10 @@
                      Highscore:{{$user->highscore}}
                 </div>
                 
+                <div class="panel-body">
+                     Money:{{$user->currency}}
+                </div>
+                
                 <table class=".table-responsive">
                 	<thead>
                 		<tr>
