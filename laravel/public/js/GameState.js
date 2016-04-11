@@ -434,16 +434,13 @@ GameState.prototype.killPlatforms = function(){
 GameState.prototype.killPlayer = function() {
     this.game.state.start('end-game-state');
     this.game.stats = this.points;
-    if(DataManager.getInternalData().highscore < this.points){
-<<<<<<< HEAD
-        DataManager.postHighscore(this.points);
-=======
+    if(DataManager.getInternalData() < this.points){
+
         DataManager.postHighscore(this.points, this.coinsQuant);
         console.log(this.points, this.coinsQuant);
     }else{
     	DataManager.postCoins(this.coinsQuant);
     	console.log(this.coinsQuant);
->>>>>>> 873b3ce26cf2899a690d0db26e2981afd33516d6
     }
     this.game.coinsCollected = this.coinsQuant;
     console.log('GAME OVER');
