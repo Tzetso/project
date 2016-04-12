@@ -93,11 +93,11 @@ a {
     margin-left: 18px;
 }
 
-#login {
+#login, #profile {
     margin-top: 60px;
 }
 
-#login div {
+#login div, #profile div {
     width: 80px;
     height: 80px;
     margin: 0px auto;
@@ -108,8 +108,11 @@ a {
     background-repeat: no-repeat;
 }
 
+#profile div {
+    background: url(assets/user-profile.png);
+}
 
-#register div {
+#register div, #logout div {
     width: 110px;
     height: 100px;
     margin-left:10px;
@@ -118,6 +121,10 @@ a {
     -webkit-background-size: 100px 90px;
     background-size: 100px 90px;
     background-repeat: no-repeat;
+}
+
+#logout div {
+    background: url(assets/logout.png);
 }
 
 #game-container {
