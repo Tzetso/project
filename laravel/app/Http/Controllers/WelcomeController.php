@@ -21,7 +21,7 @@ class WelcomeController extends Controller
 			$order = $_GET['order'];
 		}
 		
-		$users = User::orderBy($sortBy, $order)->paginate(3);
+		$users = User::orderBy($sortBy, $order)->paginate(2);
 		$count = (($users->currentPage() - 1) * $users->perPage()) + 1;
 		if(Auth::user()){
 			$user = Auth::user();			
