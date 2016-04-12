@@ -28,11 +28,6 @@ class InventorySeeder extends Seeder
         		'quantity' => 0,
         	],
         	[
-        		'user_id' => 1,
-        		'item_id' => 4,
-        		'quantity' => 0,
-        	],
-        	[
         		'user_id' => 2,
         		'item_id' => 1,
         		'quantity' => 1,
@@ -47,11 +42,6 @@ class InventorySeeder extends Seeder
         		'item_id' => 3,
        			'quantity' => 0,
        		],
-        	[
-        		'user_id' => 2,
-        		'item_id' => 4,
-        		'quantity' => 0,
-        	],
        		[
         		'user_id' => 3,
         		'item_id' => 1,
@@ -66,11 +56,6 @@ class InventorySeeder extends Seeder
         		'user_id' => 3,
         		'item_id' => 3,
        			'quantity' => 0,
-        	],
-        	[
-        		'user_id' => 3,
-        		'item_id' => 4,
-        		'quantity' => 0,
         	],
         ]);
     }

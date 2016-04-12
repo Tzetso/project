@@ -21,7 +21,8 @@ Route::get('/getdata', 'GameController@getData');
 
 
 Route::get('/profile', 'ProfileController@index');
+Route::get('/profile/skins', 'ProfileController@skins');
+Route::patch('/profile/skins', 'ProfileController@changeSkin');
 
 Route::get('/shop', 'ShopController@index');
 Route::patch('/shop', 'ShopController@buy');
-

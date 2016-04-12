@@ -23,19 +23,26 @@
                      Money:{{$user->currency}}
                 </div>
                 
+                <div class="panel-body">
+                   	Skin: <img src="{{$avatar->picture}}" alt="No image" /> 
+                    <a href="{{ url('/profile/skins') }}">
+                    	Change skin
+                	</a>
+                </div>
+                
                 <table class=".table-responsive">
                 	<thead>
                 		<tr>
+	                		<th>Picture</th>
 	                		<th>Name</th>
-	                		<th>Description</th>
 	                		<th>Quantity</th>
                 		</tr>
                 	</thead>
                 	<tbody>
 	                	@foreach($items as $item) 
 		                	<tr>
-								<td>{{$item->name}}</td>
-		                     	<td>{{$item->description}}</td>
+								<td><img src="{{$item->picture}}" alt="No image" /></td>
+		                     	<td>{{$item->name}}</td>
 		                     	<td>{{$user->items->find($item->id)->pivot->quantity}}</td>
 		                    </tr>
 	               		@endforeach

@@ -31,8 +31,19 @@ class GameController extends Controller
 
     public function getData()
     {
+    	$user = Auth::user();
+    	$skins = $user->items->where('cosmetic', 1);
+    	 
+    	foreach($skins as $skin){
+    		if($skin->pivot->quantity > 0){
+    			$avatar = $skin;
+    			break;
+    		}
+    	}
+    	
     	$data = response()->json([
-    		"highscore" => Auth::user()->highscore
+    		'highscore' => Auth::user()->highscore,
+    		'player' => $avatar->picture
     	]);
 
         return $data;

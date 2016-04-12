@@ -16,7 +16,7 @@ StartMenuState.prototype.preload = function () {
     this.game.load.image('ground', 'assets/land.png');
     this.game.load.image('column', 'assets/column.png');
     this.game.load.image('platform', 'assets/platform.png');
-    this.game.load.image('player', 'assets/phaser-dude.png');
+    this.game.load.image('player', DataManager.getPlayerSkin());
     this.game.load.image('points', 'assets/points.png');
     this.game.load.image('coin', 'assets/coin.png');
     this.game.load.image('background', 'assets/background.jpg');
