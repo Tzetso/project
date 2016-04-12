@@ -265,3 +265,62 @@ canvas {
         background-repeat: no-repeat;
     }
 }
+
+/*RANKLIST/HOMEPAGE*/
+         /*Welcome*/
+
+
+.table-container {
+    padding: 50px 0;
+    width: 80%;
+    margin: 0 auto;
+    background: rgba(16, 18, 34, 0.7);
+    -webkit-border-radius:10px;
+    -moz-border-radius:10px;
+    border-radius:10px;
+    margin-bottom: 50px;
+    line-height: 30px;
+}
+
+.table {
+    width: 800px;
+    margin: 0 auto;
+    background: #ccc;
+    color: #1d2140;
+    -webkit-border-radius:5px;
+    -moz-border-radius:5px;
+    border-radius:5px;
+}
+
+.table-heading {
+    width: 600px;
+    margin: 0 auto;
+    text-align: center;
+    line-height: 100px;
+    padding-top: 30px;
+    font-size: 40px;
+    color: #4C5490;
+}
+
+.table-body {
+    width: 600px;
+    margin: 0 auto;
+    padding-bottom: 30px;
+}
+
+th, th a{
+    color: #4C5490;
+    font-size: 25px;
+    font-weight:900;
+    line-height: 40px;
+    background: #1d2140;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+
+}
+
+td{
+    text-align: center;
+    border-bottom: 1px solid #1d2140;
+}
