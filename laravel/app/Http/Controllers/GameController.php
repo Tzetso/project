@@ -66,8 +66,9 @@ class GameController extends Controller
     	}
 		
     	$user->currency += request()->input('coin');
-    	$user->items->find($shieldsId)->pivot->quantity += request()->input('shield');
-    	$user->items->find($revivessId)->pivot->quantity += request()->input('revive');
+    	var_dump($shieldsId);
+    	//$user->items->find($shieldsId)->pivot->update([quantity => request()->input('shield')]);
+    	//$user->items->find($revivesId)->pivot->update([quantity => request()->input('revive')]);
     	$user->save();
     }
 }

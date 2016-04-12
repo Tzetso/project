@@ -5,8 +5,10 @@
     <div class="table">
                 <div class="table-heading">
                     @if($sortBy == 'currency')
+                    <div id="money"></div>
 	                    Richest Players
 	                @else
+                    <div id="trophy"></div>
 	                	Top Players
                     @endif
                 </div>
@@ -16,7 +18,7 @@
                     <table>
                         <thead>
                         <tr>                     
-                            <th>#</th>
+                            <th>Rank</th>
                             <th>Username</th>	
                             <th><a href="{{route('welcome', ['sortBy' => 'highscore', 'order' => 'DESC'])}}">Score</a></th>
                             <th><a href="{{route('welcome', ['sortBy' => 'currency', 'order' => 'DESC'])}}">Money</a></th>                                                  

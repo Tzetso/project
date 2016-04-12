@@ -143,14 +143,14 @@ a {
 }
 
 #game-div {
-    width: 700px;
+    width: 57%;
     height:600px;
     background: rgba(7, 11, 25, 0.8);
     margin: 0 auto;
-    padding-top:30px;
     -webkit-border-radius:10px;
     -moz-border-radius:10px;
     border-radius:10px;
+    padding-top: 60px;
 }
 
 canvas {
@@ -158,6 +158,11 @@ canvas {
     -webkit-border-radius:5px;
     -moz-border-radius:5px;
     border-radius:5px;
+}
+
+#game-controls {
+    width: 90%;
+    margin: 0 auto;
 }
 
 .control {
@@ -308,7 +313,7 @@ canvas {
 
 
 .table-container {
-    padding: 50px 0;
+    padding: 60px 0 10px 0;
     width: 60%;
     margin: 0 auto;
     background: rgba(16, 18, 34, 0.7);
@@ -341,6 +346,23 @@ canvas {
     color: #1d2140;
 }
 
+#trophy, #money {
+    width: 80px;
+    height:70px;
+    margin: 0 auto;
+    background: url(../assets/trophy.png);
+    -webkit-background-size: 80px 70px;
+    background-size: 80px 70px;
+    background-repeat: no-repeat;
+}
+
+#money {
+    background: url(../assets/crown.png);
+    -webkit-background-size: 80px 70px;
+    background-size: 80px 70px;
+    background-repeat: no-repeat;
+}
+
 .table-body {
     width: 80%;
     margin: 0 auto;
@@ -364,11 +386,14 @@ th, th a{
 thead {
     padding-bottom: 20px;
     line-height: 80px;
-    background: rgba(16, 18, 34, 0.9);
+    background: rgba(237, 191, 24, 0.9);
 }
 
 td{
     text-align: center;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
 }
 
 button {
@@ -388,9 +413,22 @@ table a:hover {
 }
 
 table tbody tr.even,
-table tbody tr.alt { background: #f9f9f9; }
-table tbody tr:nth-child(even) { background: #f9f9f9; }
-table tbody tr td { color: #333; padding: 9px 10px; vertical-align: top; border: none; }
+table tbody tr.alt {
+    background: #f9f9f9;
+}
+
+
+table tbody tr td {
+    color: #333;
+    padding: 9px 10px;
+    border: none;
+}
+
+table tbody tr:nth-child(even) {
+    background: #BDBDBD;
+    color: #CCC;
+}
+
 button:hover {
     width: 70px;
     height: 50px;
@@ -399,8 +437,8 @@ button:hover {
 }
 
 .nav-item:hover {
-    background-color: #5C6BDB;
-    color: #5C6BDB;
+    background-color: #EDBF18;
+    color: #EDBF18;
 }
 table td:last-child {
     border-bottom: 0;
