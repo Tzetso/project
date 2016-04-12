@@ -1,8 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="row">
-    <div class="col-lg-8 col-lg-offset-3">
+
+<div class="container">
+    <div class="container-fluid">
         <div id="game">
         </div>
     </div>
