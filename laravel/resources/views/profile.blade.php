@@ -24,13 +24,17 @@
                 </div>
                 
                 <div class="panel-body">
+                    <a href="{{ url('/profile/passchange') }}">Change password</a>
+                </div>
+                
+                <div class="panel-body">
                    	Skin: <img src="{{$avatar->picture}}" alt="No image" /> 
                     <a href="{{ url('/profile/skins') }}">
                     	Change skin
                 	</a>
                 </div>
                 
-                <table class=".table-responsive">
+                <table class="table">
                 	<thead>
                 		<tr>
 	                		<th>Picture</th>

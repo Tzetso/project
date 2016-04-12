@@ -43,6 +43,13 @@ class ProfileController extends Controller
         return view('profile', compact('user', 'items', 'avatar'));
     }
     
+    public function passView()
+    {
+    	$user = Auth::user();
+    	
+    	return view('pass', compact('user'));
+    }
+    
     public function skins()
     {
     	$user = Auth::user();

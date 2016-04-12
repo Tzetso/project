@@ -5,34 +5,37 @@
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default">
-                <div class="panel-heading">Welcome</div>
+                <div class="panel-heading">Welcome 
+                	@if($user) 
+                		{{ $user->username}}
+                	@else                 
+                    	Guest
+                    @endif
+                </div>
 
                 <div class="panel-body">
-                	@if($user) 
-                		Sup {{ $user->username}}
-                	@else                 
-                    	Sup guest
-                    @endif
                     
-                    <table class=".table-responsive">		                
+                    <table class="table">		                
 	                	<thead>		                	
 	                		<tr>
 		                		<th>#</th>
-		                		<th>Name</th>
-		                		<th>Score</th>
+		                		<th><a href="{{route('welcome', ['sortBy' => 'username', 'order' => '$order'])}}">Username</a></th>
+		                		<th><a href="{{route('welcome', ['sortBy' => 'highscore', 'order' => '$order'])}}">Score</a></th>
+		                		<th><a href="{{route('welcome', ['sortBy' => 'currency', 'order' => '$order'])}}">Money</a></th>
 	                		</tr>		                		
 	                	</thead>
 	                	
 	                	<tbody>
-                    @foreach($users as $user)
-	                	<tr>
-	                		<td>{{++$count}}</td>
-							<td>{{$user->username}}</td>
-	                     	<td>{{$user->highscore}}</td>	                     	
-	                    </tr>
-               		@endforeach
-                    	</tbody>     
-		                	        
+	                    	@foreach($users as $user)
+		                		<tr>
+		                			<td>{{ $count++ }}</td>
+									<td>{{$user->username}}</td>
+		                    	 	<td>{{$user->highscore}}</td>	
+		                    	 	<td>{{$user->currency}}</td>                       	
+		                  	  	</tr>
+	               			@endforeach
+	               			{!! $users->render() !!}
+                    	</tbody>     		                	        
 		           	</table>
                 </div>
             </div>

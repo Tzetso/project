@@ -12,7 +12,7 @@
 	                	{!! csrf_field() !!}   
 	                	{{ method_field('PATCH')}}       
 	                	
-		                <table class=".table-responsive">
+		                <table class="table">
 		                
 		                	<thead>		                	
 		                		<tr>
