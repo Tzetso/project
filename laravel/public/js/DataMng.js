@@ -14,9 +14,13 @@ var DataManager = function($){
         getHightScore:function (fn) {
             $.get('getdata',function(data){
                 score = data.highscore;
-                console.log(score,'score')
+                console.log(score,'score');
                 player = data.player;
-                console.log(player,'player')
+                console.log(player,'player');
+                shields = data.shields;
+                console.log(shields,'shields');
+                revives = data.revives;
+                console.log(revives,'revives');
                 fn(data);
             });
         },
@@ -26,14 +30,20 @@ var DataManager = function($){
         getPlayerSkin:function() {
         	return player;
         },
-        postHighscore: function (scores, coins) {
-            console.log(scores, coins)
-            $.post('game',{score:scores, coin:coins},function(){
+        getShields:function() {
+        	return shields;
+        },
+        getRevives:function() {
+        	return revives;
+        },
+        postHighscore: function (scores, coins, shields, revives) {
+            console.log(scores, coins, shields, revives)
+            $.post('game',{score:scores, coin:coins, shield:shields, revive:revives},function(){
                 console.log('Data sent');
             });
         },
-        postCoins: function (coins) {
-            console.log(coins)
+        postCoins: function (coins, shields, revives) {
+            console.log(coins, shields, revives)
             $.post('game',{coin:coins},function(){
                 console.log('Data sent');
             });

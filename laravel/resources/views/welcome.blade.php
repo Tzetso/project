@@ -3,11 +3,11 @@
 @section('content')
 <div class="table-container">
     <div class="table">
-                <div class="table-heading">Welcome
-                    @if($user)
-                    {{ $user->username}}
-                    @else
-                    Guest
+                <div class="table-heading">
+                    @if($sortBy == 'currency')
+	                    Richest Players
+	                @else
+	                	Top Players
                     @endif
                 </div>
 
@@ -15,26 +15,11 @@
 
                     <table>
                         <thead>
-                        <tr>
-                     
+                        <tr>                     
                             <th>#</th>
-                            @if($sortBy == 'username')
-                            	<th><a href="{{route('welcome', ['sortBy' => 'username', 'order' => ($order == 'ASC' ? 'DESC' : 'ASC')])}}">Username</a></th>
-                            @else	
-                            	<th><a href="{{route('welcome', ['sortBy' => 'username', 'order' => 'ASC'])}}">Username</a></th>
-                            @endif
-                            @if($sortBy == 'highscore')
-                            	<th><a href="{{route('welcome', ['sortBy' => 'highscore', 'order' => ($order == 'ASC' ? 'DESC' : 'ASC')])}}">Score</a></th>
-                            @else	
-                            	<th><a href="{{route('welcome', ['sortBy' => 'highscore', 'order' => 'DESC'])}}">Score</a></th>
-                            @endif
-                            @if($sortBy == 'currency')
-                            	<th><a href="{{route('welcome', ['sortBy' => 'currency', 'order' => ($order == 'ASC' ? 'DESC' : 'ASC')])}}">Money</a></th>
-                            @else	
-                            	<th><a href="{{route('welcome', ['sortBy' => 'currency', 'order' => 'DESC'])}}">Money</a></th>
-                            @endif
-                            
-                         
+                            <th>Username</th>	
+                            <th><a href="{{route('welcome', ['sortBy' => 'highscore', 'order' => 'DESC'])}}">Score</a></th>
+                            <th><a href="{{route('welcome', ['sortBy' => 'currency', 'order' => 'DESC'])}}">Money</a></th>                                                  
                         </tr>
                         </thead>
 
@@ -46,10 +31,8 @@
                             <td>{{$user->highscore}}</td>
                             <td>{{$user->currency}}</td>
                         </tr>
-                        @endforeach
-                        
-                        </tbody>
-                        
+                        @endforeach                      
+                        </tbody>                        
                     </table>
                 </div>
     </div>

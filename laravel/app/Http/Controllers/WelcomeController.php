@@ -16,7 +16,7 @@ class WelcomeController extends Controller
 		$sortBy = isset($_GET['sortBy']) ? $_GET['sortBy'] : 'highscore';
 		$order = isset($_GET['order']) ? $_GET['order'] : 'DESC';
 		
-		if (!in_array($sortBy, ['highscore', 'username', 'currency'])){
+		if (!in_array($sortBy, ['highscore', 'currency'])){
 			$sortBy = 'highscore';
 		}
 		
@@ -27,13 +27,7 @@ class WelcomeController extends Controller
 		$users = User::orderBy($sortBy, $order)->take(10)->get();
 		$count = 1;
 		
-		if(Auth::user()){
-			$user = Auth::user();			
-		}else{
-			$user = null;		
-		}
-		
-		return view('welcome', compact('user', 'users', 'count', 'order', 'sortBy'));
+		return view('welcome', compact('users', 'count', 'order', 'sortBy'));
 	}    
 
 }
