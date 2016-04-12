@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Auth;
 
 use App\User;
 use Validator;
+use App\Item;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
@@ -69,5 +72,31 @@ class AuthController extends Controller
             'password' => bcrypt($data['password']),
         	'currency' => 1000
         ]);
+    }
+    
+    public function register(Request $request)
+    {
+    	$validator = $this->validator($request->all());
+    
+    	if ($validator->fails()) {
+    		$this->throwValidationException(
+    				$request, $validator
+    				);
+    	}
+    
+    	Auth::guard($this->getGuard())->login($this->create($request->all()));
+
+    	//Connect the new user to all the consumables
+    	$items = Item::where('cosmetic' ,'=' , '0')->get();
+    	$user = Auth::user();
+    	var_dump($user);
+    
+    	foreach($items as $item){
+    		$user->items()->attach($item->id);
+    	}
+    	//Add default skin
+    	$user->items()->attach(1);
+    	$user->items->find(1)->pivot->update(['quantity' => 1]);
+    	return redirect($this->redirectPath());
     }
 }
