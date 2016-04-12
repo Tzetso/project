@@ -29,11 +29,39 @@ class WelcomeController extends Controller
 			$user = null;		
 		}
 		
-		if($order == 'DESC'){
-			$order = 'ASC';
-		}else{
-			$order = 'DESC';
+		switch($sortBy){
+			case 'username':
+				if($order == 'ASC'){
+					$uOrder = 'DESC';
+				}else{
+					$uOrder = 'ASC';
+				}
+				$mOrder = 'DESC';
+				$sOrder = 'DESC';
+				
+				break;
+			case 'highscore':
+				if($order == 'ASC'){
+					$sOrder = 'DESC';
+				}else{
+					$sOrder = 'ASC';
+				}
+				$mOrder = 'DESC';
+				$uOrder = 'ASC';
+				
+				break;
+			case 'currency':
+				if($order == 'ASC'){
+					$mOrder = 'DESC';
+				}else{
+					$mOrder = 'ASC';
+				}
+				$uOrder = 'ASC';
+				$sOrder = 'DESC';
+				
+				break;
 		}
-		return view('welcome', compact('user', 'users', 'count', 'order'));
+		
+		return view('welcome', compact('user', 'users', 'count', 'uOrder', 'sOrder', 'mOrder'));
 	}      	
 }

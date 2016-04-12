@@ -19,9 +19,9 @@
 	                	<thead>		                	
 	                		<tr>
 		                		<th>#</th>
-		                		<th><a href="{{route('welcome', ['sortBy' => 'username', 'order' => '$order'])}}">Username</a></th>
-		                		<th><a href="{{route('welcome', ['sortBy' => 'highscore', 'order' => '$order'])}}">Score</a></th>
-		                		<th><a href="{{route('welcome', ['sortBy' => 'currency', 'order' => '$order'])}}">Money</a></th>
+		                		<th><a href="{{route('welcome', ['sortBy' => 'username', 'order' => '$uOrder'])}}">Username</a></th>
+		                		<th><a href="{{route('welcome', ['sortBy' => 'highscore', 'order' => '$sOrder'])}}">Score</a></th>
+		                		<th><a href="{{route('welcome', ['sortBy' => 'currency', 'order' => '$mOrder'])}}">Money</a></th>
 	                		</tr>		                		
 	                	</thead>
 	                	
