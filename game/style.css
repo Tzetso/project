@@ -1,0 +1,240 @@
+body {
+    font-family: 'Indie Flower', cursive;
+    font-size: 20px;
+    text-decoration: dashed;
+    background: url(assets/stars.jpg);
+    margin:0;
+
+}
+
+#nav-holder {
+    width: 100%;
+    padding: 0px;
+    height: 300px;
+    background: url(assets/cloud-nav3.png);
+    -webkit-background-size: 80px 100px;
+    background-size: 1330px 300px;
+    background-repeat: no-repeat;
+    margin-bottom: 50px;
+}
+
+.nav {
+    width: 55%;
+    margin: 0 auto;
+    padding-left: 50px;
+}
+
+.nav-item {
+    float: left;
+    margin-right: 20px;
+    text-align: center;
+    background-color: #1d2140;
+    width: 120px;
+    height: 120px;
+    -webkit-border-radius:200px;
+    -moz-border-radius:200px;
+    border-radius:200px;
+    margin-top: 20px;
+    font-weight: 900;
+}
+
+a {
+    text-decoration: none;
+}
+
+#jumpy div {
+    width: 80px;
+    height: 100px;
+    background: url(assets/jumpy.png);
+    -webkit-background-size: 80px 100px;
+    background-size: 80px 100px;
+    background-repeat: no-repeat;
+    margin-left: 17px;
+    margin-top: 5px;
+}
+
+#nav p {
+    margin: 0 auto;
+    margin-top: 15px;
+    color: #1d2140;
+    font-size: 30px;
+}
+
+#play {
+    margin-top: 100px;
+}
+#play div {
+    width: 100px;
+    height: 100px;
+    background: url(assets/play-button.png);
+    -webkit-background-size: 100px 100px;
+    background-size: 100px 100px;
+    background-repeat: no-repeat;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+#shop {
+    margin-top: 60px;
+}
+
+#shop p {
+    margin-top: 0;
+}
+
+#shop div {
+    width: 100px;
+    height: 100px;
+    background: url(assets/shopping-cart.png);
+    -webkit-background-size: 80px 70px;
+    background-size: 80px 70px;
+    background-repeat: no-repeat;
+    margin-top: 25px;
+    margin-left: 18px;
+}
+
+#login {
+    margin-top: 60px;
+}
+
+#login div {
+    width: 80px;
+    height: 80px;
+    margin: 0px auto;
+    margin-top: 23px;
+    background: url(assets/login.png);
+    -webkit-background-size: 70px 70px;
+    background-size: 70px 70px;
+    background-repeat: no-repeat;
+}
+
+
+#register div {
+    width: 110px;
+    height: 100px;
+    margin-left:10px;
+    margin-top: 11px;
+    background: url(assets/register.png);
+    -webkit-background-size: 100px 90px;
+    background-size: 100px 90px;
+    background-repeat: no-repeat;
+}
+
+#game-container {
+    width: 100%;
+    margin-bottom: 50px;
+}
+
+#game-div {
+    width: 700px;
+    height:600px;
+    background: rgba(7, 11, 25, 0.8);
+    margin: 0 auto;
+    padding-top:30px;
+    -webkit-border-radius:10px;
+    -moz-border-radius:10px;
+    border-radius:10px;
+}
+
+canvas {
+    margin: 0 auto;
+    -webkit-border-radius:5px;
+    -moz-border-radius:5px;
+    border-radius:5px;
+}
+
+.control {
+    float: left;
+    margin-top: 40px;
+    margin-left: 55px;
+    font-size: 20px;
+    color: #ccc;
+}
+
+#footer {
+    height: 300px;
+    background: url(assets/planet.png);
+    -webkit-background-size: 1350px 300px;
+    background-size: 1350px 300px;
+    background-repeat: no-repeat;
+}
+
+.footer-item {
+    background-color: #FAFAFA;
+}
+#facebook {
+    margin-top: 140px;
+}
+#facebook div {
+    width: 110px;
+    height: 100px;
+    margin-left:10px;
+    background: url(assets/fb-logo.png);
+    -webkit-background-size: 100px 90px;
+    background-size: 100px 90px;
+    background-repeat: no-repeat;
+}
+
+#twitter {
+    margin-top: 100px;
+}
+
+#twitter div {
+    width: 110px;
+    height: 100px;
+    margin-left:13px;
+    margin-top: 25px;
+    background: url(assets/twitter-logo.png);
+    -webkit-background-size: 90px 80px;
+    background-size: 90px 80px;
+    background-repeat: no-repeat;
+}
+#google {
+    margin-top: 60px;
+}
+
+#google div {
+    width: 110px;
+    height: 100px;
+    margin-left:15px;
+    margin-top: 9px;
+    background: url(assets/google-plus-logo.png);
+    -webkit-background-size: 90px 80px;
+    background-size: 90px 80px;
+    background-repeat: no-repeat;
+}
+
+#instagram {
+    margin-top: 100px;
+}
+
+#instagram div {
+    width: 110px;
+    height: 100px;
+    margin-left:20px;
+    margin-top: 30px;
+    background: url(assets/instagram-logo.png);
+    -webkit-background-size: 80px 70px;
+    background-size: 80px 70px;
+    background-repeat: no-repeat;
+}
+
+#about-us {
+    margin-top: 140px;
+}
+#about-us div {
+    width: 110px;
+    height: 100px;
+    margin-left:7px;
+    margin-top: 20px;
+    background: url(assets/about-us-logo.png);
+    -webkit-background-size: 100px 80px;
+    background-size: 100px 80px;
+    background-repeat: no-repeat;
+}
+
+
+#footer p {
+    margin-top: -35px;
+    color: #FAFAFA;
+}

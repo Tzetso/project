@@ -11,11 +11,11 @@ GameOverMenuState.prototype.preload = function () {
 };
 GameOverMenuState.prototype.create = function () {
     this.game.world.resize(640, 480);
-    console.log(this.game);
-    console.log(this);
+    //console.log(this.game);
+    //console.log(this);
     var style = { font: "20px Courier", fill: "#fff", tabs: 132 };
 
-    this.text = this.game.add.text(this.game.world.centerX , this.game.world.centerY - 100, 'GAME OVER '+ '\n' + 'Your score: ' + this.game.stats);
+    this.text = this.game.add.text(this.game.world.centerX , this.game.world.centerY - 100, 'GAME OVER '+ '\n' + 'Your score: ' + this.game.stats + '\n' + 'Coins collected: ' + this.game.coinsCollected);
 
     //this.text = this.game.add.text(this.game.world.centerX , this.game.world.centerY - 100, 'GAME OVER');
     ////	Center align
@@ -34,7 +34,7 @@ GameOverMenuState.prototype.create = function () {
     this.text.fill = '#43d637';
 
 
-    this.start = this.game.add.text(this.game.world.centerX , this.game.world.centerY + 30, 'TRY AGAIN');
+    this.start = this.game.add.text(this.game.world.centerX , this.game.world.centerY + 100, 'TRY AGAIN');
     //	Center align
     this.start.anchor.set(0.5);
     this.start.align = 'center';
@@ -53,11 +53,6 @@ GameOverMenuState.prototype.create = function () {
         this.game.state.start('game-state', true, false);
         console.log('GAME OVER')
     }, this);
-
-
-
-
-
 
 };
 GameOverMenuState.prototype.update = function () {
