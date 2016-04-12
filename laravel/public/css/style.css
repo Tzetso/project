@@ -12,7 +12,7 @@ body {
     padding: 0px;
     height: 300px;
     background: url(../assets/cloud-nav3.png);
-    -webkit-background-size: 80px 100px;
+    -webkit-background-size: 1350px 300px;
     background-size: 1350px 300px;
     background-repeat: no-repeat;
     margin-bottom: 50px;
@@ -93,11 +93,11 @@ a {
     margin-left: 18px;
 }
 
-#login {
+#login, #profile {
     margin-top: 60px;
 }
 
-#login div {
+#login div, #profile div {
     width: 80px;
     height: 80px;
     margin: 0px auto;
@@ -108,8 +108,14 @@ a {
     background-repeat: no-repeat;
 }
 
+#profile div {
+    background: url(../assets/user-profile.png);
+    -webkit-background-size: 80px 80px;
+    background-size: 80px 80px;
+    background-repeat: no-repeat;
+}
 
-#register div {
+#register div, #logout div {
     width: 110px;
     height: 100px;
     margin-left:10px;
@@ -118,6 +124,15 @@ a {
     -webkit-background-size: 100px 90px;
     background-size: 100px 90px;
     background-repeat: no-repeat;
+}
+
+#logout div {
+    background: url(../assets/logout.png);
+    -webkit-background-size: 90px 80px;
+    background-size: 90px 80px;
+    background-repeat: no-repeat;
+    margin-left:15px;
+    margin-top: 17px;
 }
 
 #game-container {
@@ -264,10 +279,29 @@ canvas {
         background-size: 1600px 300px;
         background-repeat: no-repeat;
     }
+    
+    .table {
+    width: 1500px;
+
+    }
+    
+	.table-heading {
+	    width: 1000px;
+	}
+	
+	.table-body {
+	    width: 1000px;
+	}
+	
+	td, th {
+	width: 200px;
+	}
+    
 }
 
+
 /*RANKLIST/HOMEPAGE*/
-         /*Welcome*/
+         /**/
 
 
 .table-container {
@@ -323,4 +357,8 @@ th, th a{
 td{
     text-align: center;
     border-bottom: 1px solid #1d2140;
+}
+
+td, th {
+	width: 25%;
 }

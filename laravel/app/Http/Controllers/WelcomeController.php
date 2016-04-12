@@ -12,56 +12,28 @@ use Auth;
 class WelcomeController extends Controller
 {
 	public function index()
-	{
-		if(empty($_GET)){
+	{		
+		$sortBy = isset($_GET['sortBy']) ? $_GET['sortBy'] : 'highscore';
+		$order = isset($_GET['order']) ? $_GET['order'] : 'DESC';
+		
+		if (!in_array($sortBy, ['highscore', 'username', 'currency'])){
 			$sortBy = 'highscore';
-			$order = 'DESC';
-		}else{
-			$sortBy = $_GET['sortBy'];
-			$order = $_GET['order'];
 		}
 		
-		$users = User::orderBy($sortBy, $order)->paginate(2);
-		$count = (($users->currentPage() - 1) * $users->perPage()) + 1;
+		if($order != 'ASC' && $order != 'DESC'){
+			$order = 'DESC';
+		}
+		
+		$users = User::orderBy($sortBy, $order)->take(10)->get();
+		$count = 1;
+		
 		if(Auth::user()){
 			$user = Auth::user();			
 		}else{
 			$user = null;		
 		}
 		
-		switch($sortBy){
-			case 'username':
-				if($order == 'ASC'){
-					$uOrder = 'DESC';
-				}else{
-					$uOrder = 'ASC';
-				}
-				$mOrder = 'DESC';
-				$sOrder = 'DESC';
-				
-				break;
-			case 'highscore':
-				if($order == 'ASC'){
-					$sOrder = 'DESC';
-				}else{
-					$sOrder = 'ASC';
-				}
-				$mOrder = 'DESC';
-				$uOrder = 'ASC';
-				
-				break;
-			case 'currency':
-				if($order == 'ASC'){
-					$mOrder = 'DESC';
-				}else{
-					$mOrder = 'ASC';
-				}
-				$uOrder = 'ASC';
-				$sOrder = 'DESC';
-				
-				break;
-		}
-		
-		return view('welcome', compact('user', 'users', 'count', 'uOrder', 'sOrder', 'mOrder'));
-	}      	
+		return view('welcome', compact('user', 'users', 'count', 'order', 'sortBy'));
+	}    
+
 }

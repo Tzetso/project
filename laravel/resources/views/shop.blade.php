@@ -6,7 +6,7 @@
 	    <div class="row">
 	        <div class="col-md-10 col-md-offset-1">	        
 	            <div class="panel panel-default">	            
-	                <div class="panel-heading">Money:{{$money}}</div>
+	                <div class="panel-heading"></div>
 	                
 	                <form class="form-horizontal" role="form" method="POST" action="">    
 	                	{!! csrf_field() !!}   
@@ -20,6 +20,7 @@
 			                		<th>Name</th>
 			                		<th>Description</th>
 			                		<th>Price</th>
+			                		<th>Money:{{$money}}</th>
 		                		</tr>		                		
 		                	</thead>
 		                	

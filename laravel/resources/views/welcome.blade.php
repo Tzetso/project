@@ -16,10 +16,25 @@
                     <table>
                         <thead>
                         <tr>
+                     
                             <th>#</th>
-                            <th><a href="{{route('welcome', ['sortBy' => 'username', 'order' => '$order'])}}">Username</a></th>
-                            <th><a href="{{route('welcome', ['sortBy' => 'highscore', 'order' => '$order'])}}">Score</a></th>
-                            <th><a href="{{route('welcome', ['sortBy' => 'currency', 'order' => '$order'])}}">Money</a></th>
+                            @if($sortBy == 'username')
+                            	<th><a href="{{route('welcome', ['sortBy' => 'username', 'order' => ($order == 'ASC' ? 'DESC' : 'ASC')])}}">Username</a></th>
+                            @else	
+                            	<th><a href="{{route('welcome', ['sortBy' => 'username', 'order' => 'ASC'])}}">Username</a></th>
+                            @endif
+                            @if($sortBy == 'highscore')
+                            	<th><a href="{{route('welcome', ['sortBy' => 'highscore', 'order' => ($order == 'ASC' ? 'DESC' : 'ASC')])}}">Score</a></th>
+                            @else	
+                            	<th><a href="{{route('welcome', ['sortBy' => 'highscore', 'order' => 'DESC'])}}">Score</a></th>
+                            @endif
+                            @if($sortBy == 'currency')
+                            	<th><a href="{{route('welcome', ['sortBy' => 'currency', 'order' => ($order == 'ASC' ? 'DESC' : 'ASC')])}}">Money</a></th>
+                            @else	
+                            	<th><a href="{{route('welcome', ['sortBy' => 'currency', 'order' => 'DESC'])}}">Money</a></th>
+                            @endif
+                            
+                         
                         </tr>
                         </thead>
 
@@ -36,7 +51,6 @@
                         </tbody>
                         
                     </table>
-                    <div>{!! $users->render() !!}</div>
                 </div>
     </div>
 </div>

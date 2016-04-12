@@ -36,7 +36,7 @@
 			   	@else
 			   		<a href="{{ url('/profile') }}" class="nav-item" id="profile">
 			            <div></div>
-			            <p>{{ Auth::user()->username }}</p>
+			            <p>Profile</p>
 			        </a>
 			        <a href="{{ url('/logout') }}" class="nav-item" id="logout">
 			            <div></div>
