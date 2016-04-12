@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="style.css">
+    <link href='https://fonts.googleapis.com/css?family=Indie+Flower' rel='stylesheet' type='text/css'>
+</head>
+<body>
+
+<div id="nav-holder">
+    <div class="nav">
+        <a href="" class="nav-item" id="jumpy">
+            <div >
+            </div>
+            <p>Home</p>
+        </a>
+        <a href="" class="nav-item" id="shop">
+            <div></div>
+            <p>Shop</p>
+        </a>
+        <a href="" class="nav-item" id="play">
+            <div></div>
+            <p>Play</p>
+        </a>
+        <a href="" class="nav-item" id="login">
+            <div></div>
+            <p>Login</p>
+        </a>
+        <a href="" class="nav-item" id="register">
+            <div></div>
+            <p>Register</p>
+        </a>
+    </div>
+</div>
+<div class="table-container">
+    <div class="table">
+                <div class="table-heading">Welcome
+                    @if($user)
+                    {{ $user->username}}
+                    @else
+                    Guest
+                    @endif
+                </div>
+
+                <div class="table-body">
+
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th><a href="{{route('welcome', ['sortBy' => 'username', 'order' => '$order'])}}">Username</a></th>
+                            <th><a href="{{route('welcome', ['sortBy' => 'highscore', 'order' => '$order'])}}">Score</a></th>
+                            <th><a href="{{route('welcome', ['sortBy' => 'currency', 'order' => '$order'])}}">Money</a></th>
+                        </tr>
+                        </thead>
+
+                        <tbody>
+                        @foreach($users as $user)
+                        <tr>
+                            <td>{{ $count++ }}</td>
+                            <td>{{$user->username}}</td>
+                            <td>{{$user->highscore}}</td>
+                            <td>{{$user->currency}}</td>
+                        </tr>
+                        @endforeach
+                        {!! $users->render() !!}
+                        </tbody>
+                    </table>
+                </div>
+    </div>
+</div>
+
+<div id="footer">
+    <div class="nav">
+        <a href="" class="nav-item footer-item" id="facebook">
+            <p>Facebook</p>
+            <div >
+            </div>
+        </a>
+        <a href="" class="nav-item footer-item" id="twitter">
+            <p>Twitter</p>
+            <div></div>
+        </a>
+        <a href="" class="nav-item footer-item" id="google">
+            <p>Google+</p>
+            <div></div>
+        </a>
+        <a href="" class="nav-item footer-item" id="instagram">
+            <p>Instagram</p>
+            <div></div>
+        </a>
+        <a href="" class="nav-item footer-item" id="about-us">
+            <p>About us</p>
+            <div></div>
+        </a>
+    </div>
+</div>
+</body>
+</html>
