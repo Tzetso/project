@@ -1,14 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-<<<<<<< HEAD
-
-<div class="container">
-    <div class="container-fluid">
-=======
 <div id="game-container">
     <div id="game-div">
->>>>>>> fa6d2ccd6280d64e37c0fa8f282d1e521282bfc8
         <div id="game">
         
         </div>
