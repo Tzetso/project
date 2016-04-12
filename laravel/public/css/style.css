@@ -38,6 +38,8 @@ body {
     font-weight: 900;
 }
 
+
+
 a {
     text-decoration: none;
 }
@@ -175,8 +177,9 @@ canvas {
 }
 
 .footer-item {
-    background-color: #FAFAFA;
+    background-color: #D8D8D8;
 }
+
 #facebook {
     margin-top: 140px;
 }
@@ -306,7 +309,7 @@ canvas {
 
 .table-container {
     padding: 50px 0;
-    width: 80%;
+    width: 60%;
     margin: 0 auto;
     background: rgba(16, 18, 34, 0.7);
     -webkit-border-radius:10px;
@@ -317,48 +320,94 @@ canvas {
 }
 
 .table {
-    width: 800px;
+    width: 85%;
     margin: 0 auto;
-    background: #ccc;
+    background: rgba(242, 242, 242, 0.7);
     color: #1d2140;
     -webkit-border-radius:5px;
     -moz-border-radius:5px;
     border-radius:5px;
+    font-weight: 900;
+    margin-bottom: 50px;
 }
 
 .table-heading {
-    width: 600px;
+    width: 80%;
     margin: 0 auto;
     text-align: center;
     line-height: 100px;
     padding-top: 30px;
     font-size: 40px;
-    color: #4C5490;
+    color: #1d2140;
 }
 
 .table-body {
-    width: 600px;
+    width: 80%;
     margin: 0 auto;
     padding-bottom: 30px;
 }
-
+table {
+    width: 100%;
+    line-height: 40px;
+    padding-bottom: 20px;
+}
 th, th a{
     color: #4C5490;
     font-size: 25px;
     font-weight:900;
-    line-height: 40px;
-    background: #1d2140;
+    line-height: 70px;
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
     border-radius: 5px;
+}
 
+thead {
+    padding-bottom: 20px;
+    line-height: 80px;
+    background: rgba(16, 18, 34, 0.9);
 }
 
 td{
     text-align: center;
-    border-bottom: 1px solid #1d2140;
 }
 
-td, th {
-	width: 25%;
+button {
+    background: #1d2140;
+    border: 1px solid #4C5490;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius:10px;
+    width: 60px;
+    height: 40px;
+    cursor: pointer;
+    color: #4C5490;
+    font-weight: 600;
 }
+table a:hover {
+    color: #5C6BDB;
+}
+
+table tbody tr.even,
+table tbody tr.alt { background: #f9f9f9; }
+table tbody tr:nth-child(even) { background: #f9f9f9; }
+table tbody tr td { color: #333; padding: 9px 10px; vertical-align: top; border: none; }
+button:hover {
+    width: 70px;
+    height: 50px;
+    background-color: #5C6BDB;
+    color: #CCC;
+}
+
+.nav-item:hover {
+    background-color: #5C6BDB;
+    color: #5C6BDB;
+}
+table td:last-child {
+    border-bottom: 0;
+}
+
+.footer-item:hover {
+    color: #A2ABF0;
+}
+
+

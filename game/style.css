@@ -110,6 +110,9 @@ a {
 
 #profile div {
     background: url(assets/user-profile.png);
+    -webkit-background-size: 70px 70px;
+    background-size: 70px 70px;
+    background-repeat: no-repeat;
 }
 
 #register div, #logout div {
@@ -125,6 +128,9 @@ a {
 
 #logout div {
     background: url(assets/logout.png);
+    -webkit-background-size: 100px 90px;
+    background-size: 100px 90px;
+    background-repeat: no-repeat;
 }
 
 #game-container {
