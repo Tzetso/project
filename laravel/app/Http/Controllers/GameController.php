@@ -51,12 +51,9 @@ class GameController extends Controller
     	if(request()->input('score')){
     		$user->highscore = request()->input('score');
     	}
-		
-    	Helper::addOther(request()->input('coin'),  request()->input('shield'), request()->input('revive'));
-    	/* $user->currency += request()->input('coin');
-    	
-    	$user->items->find($shieldsId)->pivot->update(['quantity' => request()->input('shield')]);
-    	$user->items->find($revivesId)->pivot->update(['quantity' => request()->input('revive')]);
-    	$user->save(); */
+    	$coins = request()->input('coin');
+    	$shields = request()->input('shield');
+    	$revives = request()->input('revive');
+    	Helper::addOther($coins,  $shields, $revives);
     }
 }
