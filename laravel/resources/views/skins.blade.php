@@ -1,12 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-	<div class="container">
-	    <div class="row">
-	        <div class="col-md-10 col-md-offset-1">
-	            <div class="panel panel-default">
-	            	<div class="panel-heading">Skins</div>
-	            	<form action="" method="post">
+<div class="table-container">
+    <div class="table">
+	            	<div class="panel-heading skins">Skins</div>
+	            	<form action="" method="post" class="skins-table">
 		            	{!! csrf_field() !!}   
 			            {{ method_field('PATCH')}}
 			              
@@ -23,9 +21,7 @@
 		 				@endforeach
 		 				
 		 				<button type="submit" class=".btn-default">Save</button>  
-		 			</form>          
-	            </div>
-	        </div>
-	    </div>
+		 			</form>
+		 </div>
 	</div>
 @endsection

@@ -1,19 +1,16 @@
 @extends('layouts.app')
 
 @section('content')
-	<div class="container">
-	    <div class="row">
-	        <div class="col-md-10 col-md-offset-1">
-	            <div class="panel panel-default">
-	            	<div class="panel-heading">Change password</div>
-						<form action="" method="post">
+        <div class="table-container">
+	            	    <div class="panel-heading">Change password</div>
+						<form action="" method="post" class="change">
 							{!! csrf_field() !!}
 							{{ method_field('PATCH')}}
 							
 							<div class="form-group{{ $errors->has('old_password') ? ' has-error' : '' }}">
-	                            <label class="col-md-4 control-label">Old password</label>
+	                            <label >Old password</label>
 	
-	                            <div class="col-md-6">
+	                            <div >
 	                                <input type="password" class="form-control" name="old_password">
 	
 	                                @if (isset($wrong))
@@ -25,7 +22,7 @@
 	                        </div>
 	
 	                        <div class="form-group{{ $errors->has('new_password') ? ' has-error' : '' }}">
-	                            <label class="col-md-4 control-label">New Password</label>
+	                            <label>New Password</label>
 	
 	                            <div class="col-md-6">
 	                                <input type="password" class="form-control" name="new_password">
@@ -39,9 +36,9 @@
 	                        </div>
 	                        
 	                        <div class="form-group{{ $errors->has('new_password_confirmation') ? ' has-error' : '' }}">
-	                            <label class="col-md-4 control-label">Confirm Password</label>
+	                            <label>Confirm Password</label>
 	
-	                            <div class="col-md-6">
+	                            <div >
 	                                <input type="password" class="form-control" name="new_password_confirmation">
 	
 	                                @if ($errors->has('new_password_confirmation'))
@@ -51,13 +48,7 @@
 	                                @endif
 	                            </div>
 	                        </div>
-	                        
-	                        <button type="submit" class="btn btn-primary">Change password</button>
+	                        <button type="submit" class="form-group">Change password</button>
 						</form>
-	                
-	                
-	            </div>
-	        </div>
-	    </div>
-	</div>
+</div>
 @endsection
