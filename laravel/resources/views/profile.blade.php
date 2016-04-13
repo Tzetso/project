@@ -1,14 +1,18 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-10 col-md-offset-1">
-            <div class="panel panel-default">
-                <div class="panel-heading">Profile</div>
+        <div class="table-container profile-table-container">
+        <div class="table">
 
+            <div class="panel-heading">
+            <div class="profile-image-holder">
+                <img src="../assets/user-profile-blue.png">
+                <p>Profile</p>
+            </div>
+            </div>
+            <div class="panel-body-holder">
                 <div class="panel-body">
-                     Username:{{$user->username}}
+                     Username : {{$user->username}}
                 </div>
                 
                 <div class="panel-body">
@@ -33,8 +37,8 @@
                     	Change skin
                 	</a>
                 </div>
-                
-                <table class="table">
+                </div>
+                <table class="profile-table">
                 	<thead>
                 		<tr>
 	                		<th>Picture</th>
@@ -52,9 +56,7 @@
 	               		@endforeach
                 	</tbody>             
                 </table>
-                
             </div>
         </div>
-    </div>
-</div>
+
 @endsection

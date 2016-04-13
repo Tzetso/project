@@ -512,3 +512,51 @@ label {
     font-weight: 900;
     margin-top: 30px;
 }
+
+
+/*PROFILE*/
+
+.panel-heading {
+    width: 99.4%;
+    margin: 0 auto;
+    text-align: center;
+    background: #EDBF18;
+    height: 70px;
+    -webkit-border-top-left-radius: 5px;
+    -moz-border-top-left-radius: 5px;
+    border-top-left-radius: 5px;
+    -webkit-border-top-right-radius: 5px;
+    -moz-border-top-right-radius: 5px;
+    border-top-right-radius: 5px;
+    line-height: 70px;
+    color: #4C5490;
+    font-weight: 900;
+    font-size: 25px;
+}
+.profile-image-holder {
+    width: 30%;
+    margin: 0 auto;
+}
+
+.panel-heading img{
+    width: 50px;
+    height: 70px;
+    float: left;
+}
+.panel-body-holder {
+    width: 85%;
+    margin: 0 auto;
+}
+
+.profile-table {
+    -webkit-border-top-left-radius: 0px;
+    -moz-border-top-left-radius: 0px;
+    border-top-left-radius: 0px;
+    -webkit-border-top-right-radius: 0px;
+    -moz-border-top-right-radius: 0px;
+    border-top-right-radius: 0px;
+}
+
+.profile-table-container .table {
+    padding-top: 5px;
+}
