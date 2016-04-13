@@ -18,6 +18,7 @@ var DataManager = function($){
                 player = data.player;
                 console.log(player,'player');
                 shields = data.shields;
+                console.log(data);
                 console.log(shields,'shields');
                 revives = data.revives;
                 console.log(revives,'revives');

@@ -32,6 +32,8 @@ GameState.prototype.preload = function () {
 var tween;
 
 GameState.prototype.create = function () {
+    this.shields = this.game.data.shields;
+    this.revives = this.game.data.revives;
     this.background = this.game.add.image(0, 0, 'background');
     this.background.fixedToCamera = true;
 
@@ -43,15 +45,15 @@ GameState.prototype.create = function () {
     this.land = this.game.add.sprite(-50,29950,'ground');
     this.land.scale.setTo(1 ,1);
 
-  /*  this.leftColumn = this.game.add.sprite(0,0,'column');
-    this.rightColumn = this.game.add.sprite(590,0,'column');
+    /*  this.leftColumn = this.game.add.sprite(0,0,'column');
+     this.rightColumn = this.game.add.sprite(590,0,'column');
 
-    this.rightColumn.fixedToCamera = true;
-    this.leftColumn.fixedToCamera = true;
+     this.rightColumn.fixedToCamera = true;
+     this.leftColumn.fixedToCamera = true;
 
-    this.game.physics.arcade.enable(this.leftColumn);
-    this.game.physics.arcade.enable(this.rightColumn);
-  */  this.game.physics.arcade.enable(this.land);
+     this.game.physics.arcade.enable(this.leftColumn);
+     this.game.physics.arcade.enable(this.rightColumn);
+     */  this.game.physics.arcade.enable(this.land);
 
 
     //this.rightColumn.body.immovable = true;
@@ -124,32 +126,42 @@ GameState.prototype.create = function () {
     this.game.camera.follow(this.player);
     this.killPlatforms();
 
-    this.pointsImage = this.game.add.image(60, 10, 'points');
+    this.pointsImage = this.game.add.image(30, 10, 'points');
     this.pointsImage.fixedToCamera = true;
     this.pointsImage.scale.setTo(0.12,0.12)
 
-    this.coinsImage = this.game.add.image(265, 10, 'coin');
+    this.coinsImage = this.game.add.image(180, 10, 'coin');
     this.coinsImage.fixedToCamera = true;
-    this.coinsImage.scale.setTo(0.23,0.23)
+    this.coinsImage.scale.setTo(0.23,0.23);
+
+    this.shieldsImage = this.game.add.image(330, 10, 'shield');
+    this.shieldsImage.fixedToCamera = true;
+    this.shieldsImage.scale.setTo(0.9,0.9);
+
+    this.revivesImage = this.game.add.image(480, 10, 'revive');
+    this.revivesImage.fixedToCamera = true;
+    this.revivesImage.scale.setTo(0.04,0.04);
 
     var style = { font: "25px Courier", fill: '#FFF', tabs: 132 };
 
-    this.text = this.game.add.text(95, 15, this.points, style);
+    this.text = this.game.add.text(65, 15, this.points, style);
     this.text.fixedToCamera = true;
 
-    this.coinText = this.game.add.text(300, 15, this.coinsQuant, style);
+    this.coinText = this.game.add.text(215, 15, this.coinsQuant, style);
     this.coinText.fixedToCamera = true;
+
+    this.shieldText = this.game.add.text(380, 15, this.game.data.shields, style);
+    this.shieldText.fixedToCamera = true;
+
+    this.revivesText = this.game.add.text(530, 15, this.revives, style);
+    this.revivesText.fixedToCamera = true;
 
     this.jumpSound = this.game.add.audio('jumpSound');
     this.timeAntiBonusSound = this.game.add.audio('timeAntiBonusSound');
     this.timeBonusSound = this.game.add.audio('timeBonusSound');
     this.backgroundMusic = this.game.add.audio('backgroundMusic');
-
+    this.coinSound = this.game.add.audio('coinSound');
     this.backgroundMusic.play();
-
-
-
-
 };
 
 
@@ -172,16 +184,27 @@ GameState.prototype.update = function () {
     this.game.physics.arcade.overlap(this.player, this.coins, function (player, coin) {
         coin.kill();
         _this.coinsQuant += 50;
+        _this.coinSound.play();
     });
 
     this.game.physics.arcade.overlap(this.player, this.timeAntiBonuses, function (player, timeAntiBonus) {
-        timeAntiBonus.kill();
-        _this.timeAntiBonusSound.play();
-        _this.platforms.getFirstExists().kill();
-        _this.platforms.getFirstExists().kill();
-        _this.platforms.getFirstExists().kill();
-        _this.platforms.getFirstExists().kill();
-        _this.platforms.getFirstExists().kill();
+        if (_this.game.data.shields == 0) {
+            timeAntiBonus.kill();
+            _this.timeAntiBonusSound.play();
+            _this.platforms.getFirstExists().kill();
+            _this.platforms.getFirstExists().kill();
+            _this.platforms.getFirstExists().kill();
+            _this.platforms.getFirstExists().kill();
+            _this.platforms.getFirstExists().kill();
+        } else {
+            _this.game.data.shields -= 1;
+            console.log(_this.game.data.shields);
+            _this.shields -= 1;
+            timeAntiBonus.kill();
+            _this.timeAntiBonusSound.play();
+            _this.shieldText.text = _this.shields;
+
+        }
     });
 
     this.game.physics.arcade.collide(this.player, this.land);
@@ -416,9 +439,9 @@ GameState.prototype.killPlatforms = function(){
                 clearTimeout(i)
             }
             _this.timer.t -= 500;
-/*            console.log(_this.player);
-            console.log(t);
-            console.log(_this.game.time.totalElapsedSeconds());*/
+            /*            console.log(_this.player);
+             console.log(t);
+             console.log(_this.game.time.totalElapsedSeconds());*/
             if (_this.timer.t <= 0){
                 _this.timer.t = 1500;
             }
@@ -435,13 +458,13 @@ GameState.prototype.killPlayer = function() {
     this.game.state.start('end-game-state');
     this.game.stats = this.points;
     this.game.coinsCollected = this.coinsQuant;
-    
+
     if(DataManager.getScore() < this.points){
-    	DataManager.postHighscore(this.points, this.coinsQuant);
+        DataManager.postHighscore(this.points, this.coinsQuant);
         console.log(this.points, this.coinsQuant);
     }else{
-    	DataManager.postCoins(this.coinsQuant);
-    	console.log(this.coinsQuant);
+        DataManager.postCoins(this.coinsQuant);
+        console.log(this.coinsQuant);
     }
     console.log('GAME OVER');
     this.points = 0;
