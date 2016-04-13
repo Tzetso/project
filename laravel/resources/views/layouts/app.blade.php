@@ -4,7 +4,7 @@
 	<head>
 	    <meta charset="UTF-8">
 	    <title>Title</title>
-	    <link rel="stylesheet" href="css/style.css">
+	    <link rel="stylesheet" href="/css/style.css">
 	    <link href='https://fonts.googleapis.com/css?family=Indie+Flower' rel='stylesheet' type='text/css'>
 	</head>
 	<body>
