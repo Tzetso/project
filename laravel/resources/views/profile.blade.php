@@ -16,28 +16,38 @@
                 </div>
                 
                 <div class="panel-body">
-                     Email:{{$user->email}}
+                     Email : {{$user->email}}
                 </div>
                 
                 <div class="panel-body">
-                     Highscore:{{$user->highscore}}
+                     Highscore : {{$user->highscore}}
                 </div>
                 
                 <div class="panel-body">
-                     Money:{{$user->currency}}
+                     Money : {{$user->currency}}
                 </div>
-                
+
                 <div class="panel-body">
+                     Current skin : <img src="{{$avatar->picture}}" alt="No image" />
+                </div>
+
+                <div class="panel-body link">
                     <a href="{{ url('/profile/passchange') }}">Change password</a>
                 </div>
                 
-                <div class="panel-body">
-                   	Skin: <img src="{{$avatar->picture}}" alt="No image" /> 
+                <div class="panel-body link">
                     <a href="{{ url('/profile/skins') }}">
                     	Change skin
                 	</a>
                 </div>
                 </div>
+
+                <div class="panel-heading inventory">
+                            <div class="profile-image-holder">
+                                <img src="../assets/inventory.png">
+                                <p>Inventory</p>
+                            </div>
+                            </div>
                 <table class="profile-table">
                 	<thead>
                 		<tr>

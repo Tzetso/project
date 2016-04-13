@@ -534,18 +534,24 @@ label {
     font-size: 25px;
 }
 .profile-image-holder {
-    width: 30%;
+    width: 25%;
     margin: 0 auto;
 }
 
 .panel-heading img{
-    width: 50px;
+    width: 60px;
     height: 70px;
     float: left;
 }
 .panel-body-holder {
     width: 85%;
     margin: 0 auto;
+}
+
+.panel-body {
+    margin: 0 auto;
+    text-align: center;
+    line-height: 50px;
 }
 
 .profile-table {
@@ -560,3 +566,34 @@ label {
 .profile-table-container .table {
     padding-top: 5px;
 }
+
+.link {
+    width: 200px;
+    height:70px;
+    background-color: #4C5490;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    line-height: 70px;
+    margin-bottom: 20px;
+}
+
+.link a {
+    color: #CCC;
+}
+
+.link a:hover {
+    color: #EDBF18;
+}
+
+.inventory {
+    margin-top:70px;
+    background-color: #4C5490;
+    color: #EDBF18;
+}
+
+.inventory img {
+    height: 60px;
+    margin-top: 5px;
+}
+
