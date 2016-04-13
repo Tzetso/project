@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Response;
-use Auth;
-use App\Item;
 
 class GameController extends Controller
 {
@@ -30,22 +28,13 @@ class GameController extends Controller
 
     public function getData()
     {
-    	$user = Auth::user()->with('items')->first();
-    	$skins = $user->items->where('cosmetic', 1);
-    	$shieldsId = Item::where('name', 'Shield')->first()->id;
-    	$shields = $user->items->find($shieldsId)->pivot->quantity;
-    	$revivesId = Item::where('name', 'Revive')->first()->id;
-    	$revives = $user->items->find($revivesId)->pivot->quantity;
+    	$highscore = Helper::getHighscore();
+    	$avatar = Helper::getSkin();
+    	$shields = Helper::getItems('Shield');
+    	$revives = Helper::getItems('Revive');
     	 
-    	foreach($skins as $skin){
-    		if($skin->pivot->quantity > 0){
-    			$avatar = $skin;
-    			break;
-    		}
-    	}
-    	
     	$data = response()->json([
-    		'highscore' => Auth::user()->highscore,
+    		'highscore' => $highscore,
     		'player' => $avatar->picture,
     		'shields' => $shields,
     		'revives' => $revives
@@ -56,17 +45,18 @@ class GameController extends Controller
     
     public function postChanges()
     {
-    	$user = Auth::user(); 
-    	$shieldsId = Item::where('name', 'Shield')->first()->id;
-    	$revivesId = Item::where('name', 'Revive')->first()->id;
+    	$user = Helper::getUser(); 
+    	$shieldsId = Helper::getItemId('Shield');
+    	$revivesId = Helper::getItemId('Revive');
     	if(request()->input('score')){
     		$user->highscore = request()->input('score');
     	}
 		
-    	$user->currency += request()->input('coin');
-    	var_dump($shieldsId);
-    	//$user->items->find($shieldsId)->pivot->update([quantity => request()->input('shield')]);
-    	//$user->items->find($revivesId)->pivot->update([quantity => request()->input('revive')]);
-    	$user->save();
+    	Helper::addOther(request()->input('coin'),  request()->input('shield'), request()->input('revive'));
+    	/* $user->currency += request()->input('coin');
+    	
+    	$user->items->find($shieldsId)->pivot->update(['quantity' => request()->input('shield')]);
+    	$user->items->find($revivesId)->pivot->update(['quantity' => request()->input('revive')]);
+    	$user->save(); */
     }
 }

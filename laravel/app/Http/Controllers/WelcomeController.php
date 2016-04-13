@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
+use App\Http\Controllers\Helper;
 
 class WelcomeController extends Controller
 {
+	/*
+	 * Shows the top users table
+	 */
 	public function index()
-	{		
+	{	
 		$sortBy = isset($_GET['sortBy']) ? $_GET['sortBy'] : 'highscore';
 		$order = isset($_GET['order']) ? $_GET['order'] : 'DESC';
 		
@@ -19,7 +22,7 @@ class WelcomeController extends Controller
 			$order = 'DESC';
 		}
 		
-		$users = User::orderBy($sortBy, $order)->take(10)->get();
+		$users = Helper::orderUsers($sortBy, $order)->take(10)->get();
 		$count = 1;
 		
 		return view('welcome', compact('users', 'count', 'order', 'sortBy'));

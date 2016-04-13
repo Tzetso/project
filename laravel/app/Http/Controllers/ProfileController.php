@@ -2,11 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\Helper;
 
-use App\Http\Requests;
-
-use Auth;
 use Hash;
 
 class ProfileController extends Controller
@@ -28,57 +25,44 @@ class ProfileController extends Controller
      */
     public function index()
     {
-    	$user = Auth::user();
+    	$user = Helper::getUser();
     	
-    	$items = $user->items->where('cosmetic', 0);
+    	$items = Helper::getConsumables();
     	
-    	$skins = $user->items->where('cosmetic', 1);
-    	
-    	foreach($skins as $skin){
-			if($skin->pivot->quantity > 0){  
-				$avatar = $skin;
-				break;
-			}
-    	}
+    	$avatar = Helper::getSkin();
     	
         return view('profile', compact('user', 'items', 'avatar'));
     }
-    
+    /*
+     * Shows the changes password view
+     */
     public function passView()
     {
-    	$user = Auth::user();
+    	$user = Helper::getUser();
     	
     	return view('pass', compact('user'));
     }
-    
+    /*
+     * Shows the change skins view
+     */
     public function skins()
-    {
-    	$user = Auth::user();
+    {    	
+    	$user = Helper::getUser();
     	
-    	$skins = $user->items->where('cosmetic', 1);
+    	$skins = Helper::getSkins();
     	 
-    	foreach($skins as $skin){
-    		if($skin->pivot->quantity > 0){
-    			$avatar = $skin;
-    			break;
-    		}
-    	}
+    	$avatar = Helper::getSkin();
     	 
     	return view('skins', compact('user', 'skins', 'avatar'));
     }
-    
+    /*
+     * Changes the users' skin if another one was selected
+     */
     public function changeSkin()
     {
     	$id = request()->input('skin');
-    	$user = Auth::user();
-    	$skins = $user->items->where('cosmetic', 1);
-    	
-    	foreach($skins as $skin){
-    		if($skin->pivot->quantity > 0){
-    			$avatar = $skin;
-    			break;
-    		}
-    	}
+    	$user = Helper::getUser();
+    	$avatar = Helper::getSkin();
     	
     	if($avatar->id != $id){
     		$user->items->find($avatar->id)->pivot->update(['quantity' => 0]);
@@ -87,10 +71,13 @@ class ProfileController extends Controller
     	
     	return redirect('/profile');
     }
-    
+    /*
+     * Changes the password if the old one is entered correctly
+     * and the new one passes validation
+     */
     public function changePass()
     {	
-    	$user = Auth::user();
+    	$user = Helper::getUser();
     	if(!Hash::check(request()->input('old_password'),$user->password)){
     		$wrong = true;
     		return view('pass', compact('wrong'));

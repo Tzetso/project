@@ -4,11 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Item;
 
-use Auth;
+use App\Http\Controllers\Helper;
 
 class ShopController extends Controller
 {
-/**
+	/*
      * Create a new controller instance.
      *
      * @return void
@@ -16,19 +16,6 @@ class ShopController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-    }
-    
-    private function getSkins($user)
-    {
-    	$skins = Item::where('cosmetic', '=', '1')->get();
-    	$onsale = [];
-    	foreach($skins as $skin){
-    		if($user->items->contains($skin->id) == false){
-    			$onsale[] = $skin;
-    		}
-    	}
-    	
-    	return $onsale;
     }
 
     /**
@@ -38,9 +25,9 @@ class ShopController extends Controller
      */
     public function index()
     {
-    	$user = Auth::user();
-    	$items = Item::where('cosmetic', '=', '0')->get();    	
-		$skins = $this->getSkins($user);
+    	$user = Helper::getUser();
+    	$items = Helper::getConsumables();    	
+		$skins = Helper::getSkinsShop();
 
     	$money = $user->currency;
     	
@@ -50,10 +37,9 @@ class ShopController extends Controller
     public function buy()
     {	
     	$id = request()->input('button');
-    	$user = Auth::user();    	
+    	$user = Helper::getUser();   	
     	$price = Item::find($id)->price;
-    	$money = $user->currency;		
-    	
+    	$money = $user->currency;		   	
     	
     	if($money >= $price){
     		

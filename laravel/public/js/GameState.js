@@ -460,10 +460,10 @@ GameState.prototype.killPlayer = function() {
     this.game.coinsCollected = this.coinsQuant;
 
     if(DataManager.getScore() < this.points){
-        DataManager.postHighscore(this.points, this.coinsQuant);
+        DataManager.postHighscore(this.points, this.coinsQuant, this.shields, this.revives);
         console.log(this.points, this.coinsQuant);
     }else{
-        DataManager.postCoins(this.coinsQuant);
+        DataManager.postCoins(this.coinsQuant, this.shields, this.revives);
         console.log(this.coinsQuant);
     }
     console.log('GAME OVER');
