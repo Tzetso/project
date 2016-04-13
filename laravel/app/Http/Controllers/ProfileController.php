@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 
 use Auth;
+use Hash;
 
 class ProfileController extends Controller
 {
@@ -86,4 +87,20 @@ class ProfileController extends Controller
     	
     	return redirect('/profile');
     }
+    
+    public function changePass()
+    {	
+    	$user = Auth::user();
+    	if(!Hash::check(request()->input('old_password'),$user->password)){
+    		$wrong = true;
+    		return view('pass', compact('wrong'));
+    	}
+    	
+    	$this->validate(request(), [
+    			'new_password' => 'required|min:6|confirmed',
+    	]);
+    	
+    	$user->password = bcrypt(request()->input('new_password'));
+    	$user->save();
+    }    
 }
