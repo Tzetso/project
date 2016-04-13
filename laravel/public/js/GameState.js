@@ -6,7 +6,7 @@ var GameState = function(game) {
     this.points = 0;
     this.coinsQuant = 0;
     this.timer = {
-        t : 3000
+        t : 2000
     }
     this.cloudsArray = ['cloud1', 'cloud2', 'cloud3', 'cloud4', 'cloud5', 'cloud6', 'cloud7' ];
 
@@ -24,11 +24,7 @@ GameState.prototype.preload = function () {
 
 };
 
-//var textStyle = { font: '64px Desyrel', align: 'center'};
-//var timer;
-//var milliseconds = 0;
-//var seconds = 0;
-//var minutes = 0;
+
 var tween;
 
 GameState.prototype.create = function () {
@@ -202,31 +198,25 @@ GameState.prototype.update = function () {
             _this.shields -= 1;
             timeAntiBonus.kill();
             _this.timeAntiBonusSound.play();
-            _this.shieldText.text = _this.shields;
-
         }
     });
 
     this.game.physics.arcade.collide(this.player, this.land);
-    this.game.physics.arcade.collide(this.player, this.platforms, function(player){
+    this.game.physics.arcade.collide(this.player, this.platforms)
+
+    //this.game.physics.arcade.collide(this.player, this.rightColumn,function(player){
         //player.body.velocity.x = 00;
         //player.body.velocity.y = 00;
         //player.isColumn = true;
 
-    });
-    this.game.physics.arcade.collide(this.player, this.rightColumn,function(player){
+    //});
+
+    //this.game.physics.arcade.collide(this.player, this.leftColumn,function(player){
         //player.body.velocity.x = 00;
         //player.body.velocity.y = 00;
         //player.isColumn = true;
 
-    });
-
-    this.game.physics.arcade.collide(this.player, this.leftColumn,function(player){
-        //player.body.velocity.x = 00;
-        //player.body.velocity.y = 00;
-        //player.isColumn = true;
-
-    });
+    //});
 
     //this.player.body.velocity.x = 0;
 
@@ -260,6 +250,8 @@ GameState.prototype.update = function () {
 
     this.text.setText(this.points);
     this.coinText.setText(this.coinsQuant);
+    this.shieldText.setText(this.shields);
+
 
 };
 GameState.prototype.render = function(){
@@ -425,22 +417,23 @@ GameState.prototype.killPlatforms = function(){
         i = setTimeout(function(){
             callTimeout();
 
-            if (_this.player.position.y < 29800 && Date.now() - _this.dateTimer > 10000) {
+            if (_this.player.position.y < 29800 && Date.now() - _this.dateTimer > 8000) {
 
                 //console.log(platform);
 
                 platform.kill();
 
             }
-            if (Date.now() - _this.dateTimer > 5000 && _this.player.position.y > _this.platforms.getFirstExists().position.y) {
+            if (Date.now() - _this.dateTimer > 8000 && _this.player.position.y > _this.platforms.getFirstExists().position.y) {
                 //console.log(_this.player.position.y > _this.platforms.getFirstExists().position.y);
                 _this.killPlayer();
 
                 clearTimeout(i)
             }
-            _this.timer.t -= 500;
+            _this.timer.t -= 100;
+            console.log(_this.timer.t);
             /*            console.log(_this.player);
-             console.log(t);
+
              console.log(_this.game.time.totalElapsedSeconds());*/
             if (_this.timer.t <= 0){
                 _this.timer.t = 1500;
