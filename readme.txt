@@ -1,3 +1,5 @@
+Initial start:
+
 1.Install composer https://getcomposer.org/download/
 
 2.Install xampp https://www.apachefriends.org/index.html or use any other software for the MySQL server.
@@ -17,6 +19,7 @@ to the schema name you created.
 Next change DB_USERNAME and DB_PASSWORD to be equal to the username and password
 you use to establish the database 
 connection.
+
 9.Start the mysql server from the xampp controler.
 
 10.In cmd while you are in the project directory type: php artisan migrate
@@ -25,4 +28,10 @@ connection.
 
 12.If there were no problems type: php artisan serve
 
-13.The project should be now accessible at http://localhost:8000/	
+13.The project should be now accessible at http://localhost:8000/
+
+Normal start:
+
+1.Start the mysql server.
+2.In cmd go to the project directory and type: php artisan serve
+3.The project is now accessible at http://localhost:8000/
